@@ -1,0 +1,73 @@
+ext.versions = [
+        code                         : 1,
+        name                         : '1.0',
+
+        minSdk                       : 23,
+        targetSdk                    : 25,
+        compileSdk                   : 25,
+        buildTools                   : '25.0.3',
+
+        androidGradlePlugin          : '2.2.1',
+        retrolambdaGradlePlugin      : '3.2.5',
+        versionsGradlePlugin         : '0.15.0',
+        dexCount                     : '0.7.3',
+
+        dagger                       : '2.6',
+
+        rxJava                       : '1.1.8',
+        supportLibs                  : '26.0.0-alpha1',
+        constraintLayout             : '1.0.2',
+        okHttp                       : '3.2.0',
+        retrofit                     : '2.0.0-beta4',
+        gson                         : '2.7',
+        butterKnife                  : '8.2.1',
+        picasso                      : '2.5.2',
+        picassoOkHttpDownloader      : '1.0.2',
+
+        espresso                     : '2.3-alpha',
+
+        junit                        : '4.12',
+        robolectric                  : '3.1.2',
+        mockito                      : '1.10.19',
+]
+
+ext.gradlePlugins = [
+        android          : "com.android.tools.build:gradle:$versions.androidGradlePlugin",
+        retrolambda      : "me.tatarka:gradle-retrolambda:$versions.retrolambdaGradlePlugin",
+        versions         : "com.github.ben-manes:gradle-versions-plugin:$versions.versionsGradlePlugin",
+        dexCount         : "com.getkeepsafe.dexcount:dexcount-gradle-plugin:$versions.dexCount"
+]
+
+ext.libraries = [
+        dagger                  : "com.google.dagger:dagger:$versions.dagger",
+        daggerCompiler          : "com.google.dagger:dagger-compiler:$versions.dagger",
+
+        rxJava                  : "io.reactivex:rxjava:$versions.rxJava",
+
+        okHttp                  : "com.squareup.okhttp3:okhttp:$versions.okHttp",
+        okHttpLoggingInterceptor: "com.squareup.okhttp3:logging-interceptor:$versions.okHttp",
+        retrofit                : "com.squareup.retrofit2:retrofit:$versions.retrofit",
+        retrofitGsonConverter   : "com.squareup.retrofit2:converter-gson:$versions.retrofit",
+        retrofitRxJavaAdapter   : "com.squareup.retrofit2:adapter-rxjava:$versions.retrofit",
+        gson                    : "com.google.code.gson:gson:$versions.gson",
+
+        supportAnnotations      : "com.android.support:support-annotations:$versions.supportLibs",
+        supportAppCompat        : "com.android.support:appcompat-v7:$versions.supportLibs",
+        supportDesign           : "com.android.support:design:$versions.supportLibs",
+        supportRecyclerView     : "com.android.support:recyclerview-v7:$versions.supportLibs",
+        supportCardView         : "com.android.support:cardview-v7:$versions.supportLibs",
+        constraintLayout        : "com.android.support.constraint:constraint-layout:$versions.constraintLayout",
+
+        butterKnife             : "com.jakewharton:butterknife:$versions.butterKnife",
+        butterKnifeCompiler     : "com.jakewharton:butterknife-compiler:$versions.butterKnife",
+        picasso                 : "com.squareup.picasso:picasso:$versions.picasso",
+        picassoOkHttpDownloader : "com.jakewharton.picasso:picasso2-okhttp3-downloader:$versions.picassoOkHttpDownloader",
+
+        // Test dependencies
+        junit                   : "junit:junit:$versions.junit",
+        robolectric             : "org.robolectric:robolectric:$versions.robolectric",
+        okHttpMockWebServer     : "com.squareup.okhttp3:mockwebserver:$versions.okHttp",
+        mockitoCore             : "org.mockito:mockito-core:$versions.mockito",
+        espressoCore            : "com.android.support.test.espresso:espresso-core:$versions.espresso",
+        espressoContrib         : "com.android.support.test.espresso:espresso-contrib:$versions.espresso",
+]

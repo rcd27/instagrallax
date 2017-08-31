@@ -1,0 +1,65 @@
+apply plugin: 'com.android.application'
+apply plugin: 'me.tatarka.retrolambda'
+apply plugin: 'com.github.ben-manes.versions'
+
+android {
+    compileSdkVersion versions.compileSdk
+    buildToolsVersion versions.buildTools
+    defaultConfig {
+        applicationId "com.githib.rcd27.instagrallax"
+        minSdkVersion versions.minSdk
+        targetSdkVersion versions.targetSdk
+        versionCode versions.code
+        versionName versions.name
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile libraries.supportAppCompat
+    compile libraries.constraintLayout
+
+    compile libraries.dagger
+    compile libraries.daggerCompiler
+
+    compile libraries.rxJava
+
+    compile libraries.okHttp
+    debugCompile libraries.okHttpLoggingInterceptor
+    compile libraries.retrofit
+    compile libraries.retrofitGsonConverter
+    compile libraries.retrofitRxJavaAdapter
+    compile libraries.retrofitGsonConverter
+
+    compile libraries.butterKnife
+    compile libraries.butterKnifeCompiler
+    compile libraries.picasso
+    compile libraries.picassoOkHttpDownloader
+
+    testCompile libraries.junit
+    testCompile libraries.robolectric
+    testCompile libraries.mockitoCore
+    androidTestCompile libraries.espressoCore
+}
+
+configurations.all {
+    resolutionStrategy {
+        force libraries.supportAnnotations
+    }
+}
+
+def dexCount = project.hasProperty('withDexcount')
+if (dexCount) {
+    apply plugin: 'com.getkeepsafe.dexcount'
+
+    dexcount {
+        includeTotalMethodCount = true
+    }
+}
