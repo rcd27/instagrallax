@@ -22,12 +22,11 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
     compile libraries.supportAppCompat
     compile libraries.constraintLayout
 
     compile libraries.dagger
-    compile libraries.daggerCompiler
+    annotationProcessor libraries.daggerCompiler
 
     compile libraries.rxJava
 
@@ -39,7 +38,7 @@ dependencies {
     compile libraries.retrofitGsonConverter
 
     compile libraries.butterKnife
-    compile libraries.butterKnifeCompiler
+    annotationProcessor libraries.butterKnifeCompiler
     compile libraries.picasso
     compile libraries.picassoOkHttpDownloader
 
@@ -52,9 +51,11 @@ dependencies {
 configurations.all {
     resolutionStrategy {
         force libraries.supportAnnotations
+        force 'com.google.guava:guava:19.0'
     }
 }
 
+// run: gradlew -PwithDexcount assembleDebug
 def dexCount = project.hasProperty('withDexcount')
 if (dexCount) {
     apply plugin: 'com.getkeepsafe.dexcount'
