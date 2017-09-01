@@ -15,6 +15,7 @@ ext.versions = [
         dagger                       : '2.11',
 
         rxJava                       : '2.1.3',
+        rxAndroid                    : '2.0.1',
         supportLibs                  : '26.0.0-alpha1',
         constraintLayout             : '1.0.2',
         okHttp                       : '3.8.1',
@@ -43,6 +44,7 @@ ext.libraries = [
         daggerCompiler          : "com.google.dagger:dagger-compiler:$versions.dagger",
 
         rxJava                  : "io.reactivex.rxjava2:rxjava:$versions.rxJava",
+        rxAndroid               : "io.reactivex.rxjava2:rxandroid:$versions.rxAndroid",
 
         okHttp                  : "com.squareup.okhttp3:okhttp:$versions.okHttp",
         okHttpLoggingInterceptor: "com.squareup.okhttp3:logging-interceptor:$versions.okHttp",

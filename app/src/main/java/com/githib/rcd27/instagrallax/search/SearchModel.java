@@ -18,4 +18,9 @@ class SearchModel implements SearchContract.Model {
     public Observable<String[]> getSuggestions(@NonNull String forQuery) {
         return Observable.just(SUGGESTIONS);
     }
+
+    @Override
+    public Observable<String[]> getAllSuggetsions() {
+        return Observable.just(SUGGESTIONS);
+    }
 }

@@ -2,18 +2,19 @@ package com.githib.rcd27.instagrallax.search;
 
 import android.app.SearchManager;
 import android.content.Context;
+import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.widget.CursorAdapter;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.view.Menu;
-import android.view.SearchEvent;
 import android.widget.Toast;
 
 import com.githib.rcd27.instagrallax.R;
+import com.githib.rcd27.instagrallax.user.UserActivity;
 
 public class SearchActivity extends AppCompatActivity implements SearchContract.View {
 
@@ -24,7 +25,7 @@ public class SearchActivity extends AppCompatActivity implements SearchContract.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_search);
         presenter = new SearchPresenter(this);
         //FIXME: "userName" фигурирует в презентере. Перенести создание адаптера и курсора в одно место.
         cursorAdapter = new SimpleCursorAdapter(
@@ -59,10 +60,25 @@ public class SearchActivity extends AppCompatActivity implements SearchContract.
 
             @Override
             public boolean onSuggestionClick(int position) {
-                Toast.makeText(getApplicationContext(),
-                        "Suggestion has been clicked",
-                        Toast.LENGTH_SHORT).show();
+                CursorAdapter ca = searchView.getSuggestionsAdapter();
+                Cursor cursor = ca.getCursor();
+                cursor.moveToPosition(position);
+
+                showUser(cursor.getString(cursor.getColumnIndex("userName")));
                 return true;
+            }
+        });
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                presenter.goToUserIfExists(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
             }
         });
 
@@ -71,19 +87,15 @@ public class SearchActivity extends AppCompatActivity implements SearchContract.
         return true;
     }
 
-    /**
-     * Срабатывает, когда поступил запрос на поиск.
-     *
-     * @param searchEvent - ну, собственно запрос, надо полагать.
-     * @return - ну и возвращает, как всегда, непонятный boolean
-     */
-    @Override
-    public boolean onSearchRequested(@Nullable SearchEvent searchEvent) {
-        return super.onSearchRequested(searchEvent);
-    }
-
     @Override
     public void showError(@NonNull String errorMessage) {
         Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void showUser(@NonNull String query) {
+        Intent goToUserActivity = new Intent(getApplicationContext(), UserActivity.class);
+        goToUserActivity.putExtra("USER_NAME", query);
+        startActivity(goToUserActivity);
     }
 }

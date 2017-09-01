@@ -33,6 +33,7 @@ dependencies {
     annotationProcessor libraries.daggerCompiler
 
     compile libraries.rxJava
+    compile libraries.rxAndroid
 
     compile libraries.okHttp
     debugCompile libraries.okHttpLoggingInterceptor

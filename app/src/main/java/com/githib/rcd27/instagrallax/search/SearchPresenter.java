@@ -3,7 +3,10 @@ package com.githib.rcd27.instagrallax.search;
 
 import android.database.MatrixCursor;
 import android.provider.BaseColumns;
-import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 
 class SearchPresenter implements SearchContract.Presenter {
@@ -17,16 +20,43 @@ class SearchPresenter implements SearchContract.Presenter {
     }
 
     @Override
-    public MatrixCursor refreshSuggestions(@NonNull String query) {
+    public MatrixCursor refreshSuggestions(@Nullable String query) {
         final MatrixCursor mc = new MatrixCursor(new String[]{BaseColumns._ID, "userName"});
-        model.getSuggestions(query)
+        if (null != query) {
+            model.getSuggestions(query)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .doOnError(throwable -> view.showError(throwable.getMessage()))
+                    .subscribe(suggestions -> {
+                        // TODO можно и маппер написать на это дело.
+                        for (int i = 0; i < suggestions.length; i++) {
+                            if (suggestions[i].toLowerCase().startsWith(query.toLowerCase())) {
+                                mc.addRow(new Object[]{i, suggestions[i]});
+                            }
+                        }
+                    });
+            return mc;
+        }
+        // FIXME: не отрабатывает.
+        model.getAllSuggetsions()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnError(throwable -> view.showError(throwable.getMessage()))
                 .subscribe(suggestions -> {
                     for (int i = 0; i < suggestions.length; i++) {
-                        if (suggestions[i].toLowerCase().startsWith(query.toLowerCase())) {
-                            mc.addRow(new Object[]{i, suggestions[i]});
-                        }
+                        mc.addRow(new Object[]{i, suggestions[i]});
                     }
                 });
         return mc;
+    }
+
+    @Override
+    public void goToUserIfExists(@Nullable String query) {
+        if (null != query) {
+            /* Логика проверки существования юзера */
+            view.showUser(query);
+        } else {
+            view.showError("Search query must not be null");
+        }
     }
 }
