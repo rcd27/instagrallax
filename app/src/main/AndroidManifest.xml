@@ -13,7 +13,7 @@
             android:name="android.app.default_searchable"
             android:value=".SearchActivity" />
 
-        <activity android:name=".SearchActivity"
+        <activity android:name=".search.SearchActivity"
             android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -1,10 +1,8 @@
-package com.githib.rcd27.instagrallax;
+package com.githib.rcd27.instagrallax.search;
 
 import android.app.SearchManager;
 import android.content.Context;
-import android.database.MatrixCursor;
 import android.os.Bundle;
-import android.provider.BaseColumns;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.CursorAdapter;
@@ -15,20 +13,20 @@ import android.view.Menu;
 import android.view.SearchEvent;
 import android.widget.Toast;
 
-public class SearchActivity extends AppCompatActivity {
+import com.githib.rcd27.instagrallax.R;
 
-    private static final String[] SUGGESTIONS = {
-            "Вариант#1", "Вариант#2", "Вариант#3",
-            "Не варинат", "Кукуруза", "арбуз",
-            "Мыло", "верёвка", "КОмод", "стОл"
-    };
+public class SearchActivity extends AppCompatActivity implements SearchContract.View {
+
+    private SearchContract.Presenter presenter;
+
     private SimpleCursorAdapter cursorAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        /* presenter block*/
+        presenter = new SearchPresenter(this);
+        //FIXME: "userName" фигурирует в презентере. Перенести создание адаптера и курсора в одно место.
         cursorAdapter = new SimpleCursorAdapter(
                 SearchActivity.this,
                 R.layout.support_simple_spinner_dropdown_item,
@@ -68,37 +66,9 @@ public class SearchActivity extends AppCompatActivity {
             }
         });
 
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                Toast.makeText(getApplicationContext(),
-                        "Query text has been submitted",
-                        Toast.LENGTH_SHORT).show();
-                return true;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                // newText -> presenter
-                updateAdapter(newText);
-                return true;
-            }
-        });
+        cursorAdapter.setFilterQueryProvider(query -> presenter.refreshSuggestions((String) query));
 
         return true;
-    }
-
-    //TODO вынести в интерфейс
-    private void updateAdapter(@NonNull String query) {
-        /* presenter block*/
-        final MatrixCursor mc = new MatrixCursor(new String[]{BaseColumns._ID, "userName"});
-        for (int i = 0; i < SUGGESTIONS.length; i++) {
-            if (SUGGESTIONS[i].toLowerCase().startsWith(query.toLowerCase())) {
-                mc.addRow(new Object[]{i,SUGGESTIONS[i]});
-            }
-        }
-        // cursorAdapter <-♦ presenter
-        cursorAdapter.changeCursor(mc);
     }
 
     /**
@@ -110,5 +80,10 @@ public class SearchActivity extends AppCompatActivity {
     @Override
     public boolean onSearchRequested(@Nullable SearchEvent searchEvent) {
         return super.onSearchRequested(searchEvent);
+    }
+
+    @Override
+    public void showError(@NonNull String errorMessage) {
+        Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show();
     }
 }
