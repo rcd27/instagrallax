@@ -5,10 +5,11 @@ import android.database.MatrixCursor;
 import android.provider.BaseColumns;
 import android.support.annotation.NonNull;
 
-public class SearchPresenter implements SearchContract.Presenter {
 
-    private final SearchContract.View view;
+class SearchPresenter implements SearchContract.Presenter {
+
     private final SearchContract.Model model;
+    private final SearchContract.View view;
 
     public SearchPresenter(SearchContract.View view) {
         this.view = view;

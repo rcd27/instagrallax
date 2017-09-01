@@ -3,9 +3,10 @@ package com.githib.rcd27.instagrallax.search;
 
 import android.support.annotation.NonNull;
 
-import rx.Observable;
+import io.reactivex.Observable;
 
-public class SearchModel implements SearchContract.Model {
+
+class SearchModel implements SearchContract.Model {
 
     private static final String[] SUGGESTIONS = {
             "Вариант#1", "Вариант#2", "Вариант#3",

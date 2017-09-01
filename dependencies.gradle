@@ -14,7 +14,7 @@ ext.versions = [
 
         dagger                       : '2.11',
 
-        rxJava                       : '1.3.0',
+        rxJava                       : '2.1.3',
         supportLibs                  : '26.0.0-alpha1',
         constraintLayout             : '1.0.2',
         okHttp                       : '3.8.1',
@@ -42,13 +42,13 @@ ext.libraries = [
         dagger                  : "com.google.dagger:dagger:$versions.dagger",
         daggerCompiler          : "com.google.dagger:dagger-compiler:$versions.dagger",
 
-        rxJava                  : "io.reactivex:rxjava:$versions.rxJava",
+        rxJava                  : "io.reactivex.rxjava2:rxjava:$versions.rxJava",
 
         okHttp                  : "com.squareup.okhttp3:okhttp:$versions.okHttp",
         okHttpLoggingInterceptor: "com.squareup.okhttp3:logging-interceptor:$versions.okHttp",
         retrofit                : "com.squareup.retrofit2:retrofit:$versions.retrofit",
         retrofitGsonConverter   : "com.squareup.retrofit2:converter-gson:$versions.retrofit",
-        retrofitRxJavaAdapter   : "com.squareup.retrofit2:adapter-rxjava:$versions.retrofit",
+        retrofitRxJavaAdapter   : "com.squareup.retrofit2:adapter-rxjava2:$versions.retrofit",
         gson                    : "com.google.code.gson:gson:$versions.gson",
 
         supportAnnotations      : "com.android.support:support-annotations:$versions.supportLibs",

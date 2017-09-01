@@ -4,9 +4,10 @@ package com.githib.rcd27.instagrallax.search;
 import android.database.MatrixCursor;
 import android.support.annotation.NonNull;
 
-import rx.Observable;
+import io.reactivex.Observable;
 
-public interface SearchContract {
+
+interface SearchContract {
 
     interface Model {
 
