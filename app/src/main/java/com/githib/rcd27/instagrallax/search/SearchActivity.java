@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.provider.BaseColumns;
 import android.support.annotation.NonNull;
 import android.support.v4.widget.CursorAdapter;
 import android.support.v4.widget.SimpleCursorAdapter;
@@ -32,10 +33,12 @@ public class SearchActivity extends AppCompatActivity implements SearchContract.
                 SearchActivity.this,
                 R.layout.support_simple_spinner_dropdown_item,
                 null,
+                // Колонка, которую показываем в списке
                 new String[]{"userName"},
                 new int[]{android.R.id.text1},
                 CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER
         );
+        cursorAdapter.setFilterQueryProvider(query -> presenter.getCursorFor((String) query));
     }
 
     @Override
@@ -64,7 +67,7 @@ public class SearchActivity extends AppCompatActivity implements SearchContract.
                 Cursor cursor = ca.getCursor();
                 cursor.moveToPosition(position);
 
-                showUser(cursor.getString(cursor.getColumnIndex("userName")));
+                showUser(cursor.getString(cursor.getColumnIndex("instId")));
                 return true;
             }
         });
@@ -82,8 +85,6 @@ public class SearchActivity extends AppCompatActivity implements SearchContract.
             }
         });
 
-        cursorAdapter.setFilterQueryProvider(query -> presenter.refreshSuggestions((String) query));
-
         return true;
     }
 
@@ -95,14 +96,16 @@ public class SearchActivity extends AppCompatActivity implements SearchContract.
     @Override
     public void showUser(@NonNull String query) {
         Intent goToUserActivity = new Intent(getApplicationContext(), UserActivity.class);
-        goToUserActivity.putExtra("USER_NAME", query);
+        goToUserActivity.putExtra("USER_ID", query);
         startActivity(goToUserActivity);
     }
 
     @Override
     protected void onStop() {
         //  see: https://developer.android.com/reference/android/support/v4/widget/CursorAdapter.html#FLAG_REGISTER_CONTENT_OBSERVER
-        cursorAdapter.getCursor().close();
+        if (null != cursorAdapter && null != cursorAdapter.getCursor()) {
+            cursorAdapter.getCursor().close();
+        }
         super.onStop();
     }
 }

@@ -2,6 +2,9 @@ package com.githib.rcd27.instagrallax.search;
 
 
 import android.support.annotation.NonNull;
+import android.util.SparseArray;
+
+import java.util.Random;
 
 import io.reactivex.Observable;
 
@@ -9,18 +12,28 @@ import io.reactivex.Observable;
 class SearchModel implements SearchContract.Model {
 
     private static final String[] SUGGESTIONS = {
-            "Вариант#1", "Вариант#2", "Вариант#3",
-            "Не варинат", "Кукуруза", "арбуз",
-            "Мыло", "верёвка", "КОмод", "стОл"
+            "Иван Охлобыстин", "Андрей Кочергин", "Михаил Кокляев",
+            "Сергий Алиев", "Федор Емельяненко", "Эд Халилов",
+            "Сергей Бадюк", "Александр Невский", "Евгений Радионов", "Виталий Лебедь"
     };
 
-    @Override
-    public Observable<String[]> getSuggestions(@NonNull String forQuery) {
-        return Observable.just(SUGGESTIONS);
+    private static final SparseArray<String> users = new SparseArray<>();
+
+    static {
+        Random gimmeRandom = new Random();
+        for (String s : SUGGESTIONS) {
+            int randomID = Math.abs(gimmeRandom.nextInt());
+            users.put(randomID, s);
+        }
     }
 
     @Override
-    public Observable<String[]> getAllSuggetsions() {
-        return Observable.just(SUGGESTIONS);
+    public Observable<SparseArray<String>> getSuggestions(@NonNull String forQuery) {
+        return Observable.just(users);
+    }
+
+    @Override
+    public Observable<SparseArray<String>> getAllSuggestions() {
+        return Observable.just(users);
     }
 }

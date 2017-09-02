@@ -15,7 +15,8 @@ public class UserActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
-        setTitle(getIntent().getExtras().getString("USER_NAME"));
+        //TODO поменять на int
+        setTitle(getIntent().getExtras().getString("USER_ID"));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 

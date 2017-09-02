@@ -19,34 +19,26 @@ class SearchPresenter implements SearchContract.Presenter {
         this.model = new SearchModel();
     }
 
+    // TODO тут выполняется по сути работа FilterQueryProvider. Изучить.
     @Override
-    public MatrixCursor refreshSuggestions(@Nullable String query) {
-        final MatrixCursor mc = new MatrixCursor(new String[]{BaseColumns._ID, "userName"});
+    public MatrixCursor getCursorFor(@Nullable String query) {
+        final MatrixCursor mc = new MatrixCursor(new String[]{BaseColumns._ID, "instId", "userName"});
         if (null != query) {
             model.getSuggestions(query)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .doOnError(throwable -> view.showError(throwable.getMessage()))
-                    .subscribe(suggestions -> {
-                        // TODO можно и маппер написать на это дело.
-                        for (int i = 0; i < suggestions.length; i++) {
-                            if (suggestions[i].toLowerCase().startsWith(query.toLowerCase())) {
-                                mc.addRow(new Object[]{i, suggestions[i]});
+                    .subscribe(users -> {
+                        for (int i = 0; i < users.size(); i++) {
+                            int currentKey = users.keyAt(i);
+                            String currentUser = users.get(currentKey);
+                            if (currentUser.toLowerCase().startsWith(query.toLowerCase())) {
+                                mc.addRow(new Object[]{i, currentKey, currentUser});
                             }
                         }
                     });
             return mc;
         }
-        // FIXME: не отрабатывает.
-        model.getAllSuggetsions()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .doOnError(throwable -> view.showError(throwable.getMessage()))
-                .subscribe(suggestions -> {
-                    for (int i = 0; i < suggestions.length; i++) {
-                        mc.addRow(new Object[]{i, suggestions[i]});
-                    }
-                });
         return mc;
     }
 

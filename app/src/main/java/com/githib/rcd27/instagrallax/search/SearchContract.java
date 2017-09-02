@@ -4,6 +4,7 @@ package com.githib.rcd27.instagrallax.search;
 import android.database.MatrixCursor;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.SparseArray;
 
 import io.reactivex.Observable;
 
@@ -13,9 +14,9 @@ interface SearchContract {
     interface Model {
 
         /* Предоставляет список SUGGESTIONS */
-        Observable<String[]> getSuggestions(@NonNull String forQuery);
+        Observable<SparseArray<String>> getSuggestions(@NonNull String forQuery);
 
-        Observable<String[]> getAllSuggetsions();
+        Observable<SparseArray<String>> getAllSuggestions();
     }
 
     interface View {
@@ -29,7 +30,7 @@ interface SearchContract {
     interface Presenter {
 
         /* Обновляет список getSuggestions для поиска */
-        MatrixCursor refreshSuggestions(@NonNull String query);
+        MatrixCursor getCursorFor(@NonNull String query);
 
         void goToUserIfExists(@Nullable String query);
     }
