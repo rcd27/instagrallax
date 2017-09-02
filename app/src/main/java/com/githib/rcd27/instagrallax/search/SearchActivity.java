@@ -98,4 +98,11 @@ public class SearchActivity extends AppCompatActivity implements SearchContract.
         goToUserActivity.putExtra("USER_NAME", query);
         startActivity(goToUserActivity);
     }
+
+    @Override
+    protected void onStop() {
+        //  see: https://developer.android.com/reference/android/support/v4/widget/CursorAdapter.html#FLAG_REGISTER_CONTENT_OBSERVER
+        cursorAdapter.getCursor().close();
+        super.onStop();
+    }
 }
