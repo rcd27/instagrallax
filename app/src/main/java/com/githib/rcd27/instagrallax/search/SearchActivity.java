@@ -67,7 +67,7 @@ public class SearchActivity extends AppCompatActivity implements SearchContract.
                 Cursor cursor = ca.getCursor();
                 cursor.moveToPosition(position);
 
-                showUser(cursor.getString(cursor.getColumnIndex("instId")));
+                showUser(cursor.getInt(cursor.getColumnIndex("instId")));
                 return true;
             }
         });
@@ -94,9 +94,9 @@ public class SearchActivity extends AppCompatActivity implements SearchContract.
     }
 
     @Override
-    public void showUser(@NonNull String query) {
+    public void showUser(int userId) {
         Intent goToUserActivity = new Intent(getApplicationContext(), UserActivity.class);
-        goToUserActivity.putExtra("USER_ID", query);
+        goToUserActivity.putExtra("USER_ID", userId);
         startActivity(goToUserActivity);
     }
 

@@ -46,7 +46,7 @@ class SearchPresenter implements SearchContract.Presenter {
     public void goToUserIfExists(@Nullable String query) {
         if (null != query) {
             /* Логика проверки существования юзера */
-            view.showUser(query);
+            view.showError("No such user");
         } else {
             view.showError("Search query must not be null");
         }

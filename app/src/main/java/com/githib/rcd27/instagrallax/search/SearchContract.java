@@ -23,7 +23,7 @@ interface SearchContract {
 
         void showError(@NonNull String errorMessage);
 
-        void showUser(@NonNull String query);
+        void showUser(int userId);
 
     }
 

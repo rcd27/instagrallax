@@ -17,16 +17,12 @@ public class UserActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
-        //TODO поменять на int
-        int currentUserId = 0;
-        try {
-            currentUserId = Integer.parseInt(getIntent().getExtras().getString("USER_ID"));
-        } catch (NumberFormatException e) {
-            showError();
-        }
+
+        int currentUserId = getIntent().getExtras().getInt("USER_ID");
         UserRepository.getUserById(currentUserId)
                 .doOnError(throwable -> showError())
                 .subscribe(this::setTitle);
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
