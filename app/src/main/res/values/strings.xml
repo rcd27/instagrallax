@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Instagrallax</string>
     <string name="search">Search</string>
+    <string name="image_view_description">No shit! This is image view!</string>
 </resources>

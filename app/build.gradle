@@ -28,6 +28,7 @@ android {
 dependencies {
     compile libraries.supportAppCompat
     compile libraries.constraintLayout
+    compile libraries.supportRecyclerView
 
     compile libraries.dagger
     annotationProcessor libraries.daggerCompiler
