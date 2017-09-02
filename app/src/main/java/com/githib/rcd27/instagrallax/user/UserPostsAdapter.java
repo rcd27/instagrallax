@@ -10,11 +10,23 @@ import android.widget.ImageView;
 import com.githib.rcd27.instagrallax.R;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 class UserPostsAdapter extends RecyclerView.Adapter<UserPostsAdapter.ViewHolder> {
 
     private final Picasso picasso;
+
+    private List<String> posts = new ArrayList<String>() {{
+        add("https://avatars3.githubusercontent.com/u/20042955?v=4&s=460");
+        add("https://upload.wikimedia.org/wikipedia/en/a/a6/Bender_Rodriguez.png");
+        add("https://vignette3.wikia.nocookie.net/en.futurama/images/7/70/BenderTheOffender.jpg/revision/latest?cb=20110614181253");
+        add("http://static.tvfanatic.com/images/gallery/bender-smoking.jpg");
+        add("https://pbs.twimg.com/profile_images/1207791845/bender.gif");
+        add("http://www.prorobot.ru/gallery/foto/11110044536.jpg");
+        add("https://vignette1.wikia.nocookie.net/en.futurama/images/5/5b/I%27m_40%25_Bender/revision/latest?cb=20140722150206");
+        add("https://avatanplus.com/files/resources/mid/583a117a78fc5158a2d44680.png");
+    }};
 
     UserPostsAdapter(Picasso picasso) {
         this.picasso = picasso;
@@ -30,13 +42,13 @@ class UserPostsAdapter extends RecyclerView.Adapter<UserPostsAdapter.ViewHolder>
 
     @Override
     public void onBindViewHolder(UserPostsAdapter.ViewHolder holder, int position) {
-        picasso.load("https://avatars3.githubusercontent.com/u/20042955?v=4&s=460")
+        picasso.load(posts.get(position))
                 .into(holder.imageView);
     }
 
     @Override
     public int getItemCount() {
-        return 8;
+        return posts.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
