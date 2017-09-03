@@ -10,7 +10,7 @@ class UserPresenter implements UserContract.Presenter {
 
     UserPresenter(UserContract.View view) {
         this.view = view;
-        this.userRepository = new UserRepository();
+        this.userRepository = UserRepository.getInstance();
     }
 
     @Override
