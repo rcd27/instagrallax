@@ -16,6 +16,7 @@ import java.util.List;
 class UserPostsAdapter extends RecyclerView.Adapter<UserPostsAdapter.ViewHolder> {
 
     private final Picasso picasso;
+    private final UserContract.Presenter presenter;
 
     private List<String> posts = new ArrayList<String>() {{
         add("https://avatars3.githubusercontent.com/u/20042955?v=4&s=460");
@@ -28,14 +29,17 @@ class UserPostsAdapter extends RecyclerView.Adapter<UserPostsAdapter.ViewHolder>
         add("https://avatanplus.com/files/resources/mid/583a117a78fc5158a2d44680.png");
     }};
 
-    UserPostsAdapter(Picasso picasso) {
+    UserPostsAdapter(Picasso picasso, UserContract.Presenter presenter) {
         this.picasso = picasso;
+        this.presenter = presenter;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View image = inflater.inflate(R.layout.activity_user_recycler_view_cell, parent, false);
+        //TODO передать ID
+        image.setOnClickListener(presenter::onPostClicked);
 
         return new ViewHolder(image);
     }

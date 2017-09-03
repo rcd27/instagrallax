@@ -15,9 +15,7 @@
             android:name="android.app.default_searchable"
             android:value=".SearchActivity" />
 
-        <activity
-            android:name=".search.SearchActivity"
-            android:launchMode="singleTop">
+        <activity android:name=".search.SearchActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -30,7 +28,10 @@
 
         <activity
             android:name=".user.UserActivity"
-            android:parentActivityName=".search.SearchActivity"
+            android:theme="@style/Theme.AppCompat" />
+
+        <activity
+            android:name=".post.PostActivity"
             android:theme="@style/Theme.AppCompat" />
 
     </application>

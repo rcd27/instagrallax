@@ -3,17 +3,21 @@ package com.githib.rcd27.instagrallax.user;
 
 import android.support.annotation.NonNull;
 
-public interface UserContract {
+interface UserContract {
 
-    interface View{
+    interface View {
 
         void showError();
 
         void setTitleForCurrentUser(@NonNull String userName);
+
+        void startPostActivity(int postId);
     }
 
-    interface Presenter{
+    interface Presenter {
 
         void getUserNameById(int currentUserId);
+
+        void onPostClicked(android.view.View view);
     }
 }
