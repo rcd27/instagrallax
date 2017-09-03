@@ -11,13 +11,15 @@ import io.reactivex.Observable;
 
 class SearchModel implements SearchContract.Model {
 
+    private UserRepository userRepository = UserRepository.getInstance();
+
     @Override
     public Observable<SparseArray<String>> getSuggestions(@NonNull String forQuery) {
-        return UserRepository.getSuggestions(forQuery);
+        return userRepository.getSuggestions(forQuery);
     }
 
     @Override
     public Observable<SparseArray<String>> getAllSuggestions() {
-        return UserRepository.getAllSuggestions();
+        return userRepository.getAllSuggestions();
     }
 }
