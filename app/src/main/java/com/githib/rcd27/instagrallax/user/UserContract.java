@@ -12,13 +12,13 @@ interface UserContract {
 
         void setTitleForCurrentUser(@NonNull String userName);
 
-        void startPostActivity(int postId,@NonNull ImageView imageView,@NonNull String imageUrl);
+        void startPostActivity(int postId, @NonNull ImageView imageView, @NonNull String imageUrl);
     }
 
     interface Presenter {
 
         void getUserNameById(int currentUserId);
 
-        void onPostClicked(int postId,@NonNull ImageView view,@NonNull String imageUrl);
+        void onPostClicked(int postId, @NonNull ImageView view, @NonNull String imageUrl);
     }
 }

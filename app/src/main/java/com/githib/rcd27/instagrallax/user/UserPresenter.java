@@ -2,7 +2,6 @@ package com.githib.rcd27.instagrallax.user;
 
 
 import android.support.annotation.NonNull;
-import android.view.View;
 import android.widget.ImageView;
 
 import com.githib.rcd27.instagrallax.data.UserRepository;
