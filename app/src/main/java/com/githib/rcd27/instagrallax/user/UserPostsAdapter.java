@@ -38,16 +38,17 @@ class UserPostsAdapter extends RecyclerView.Adapter<UserPostsAdapter.ViewHolder>
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View image = inflater.inflate(R.layout.activity_user_recycler_view_cell, parent, false);
-        //TODO передать ID
-        image.setOnClickListener(presenter::onPostClicked);
-
         return new ViewHolder(image);
     }
 
     @Override
     public void onBindViewHolder(UserPostsAdapter.ViewHolder holder, int position) {
-        picasso.load(posts.get(position))
-                .into(holder.imageView);
+        String imageUrl = posts.get(position); //                              ↑
+        picasso.load(imageUrl)                 //                              ↑
+                .into(holder.imageView);       //                              ↑
+        //                 ↓**********************warning about position : int ↑
+        holder.postId = position;
+        holder.imageUrl = imageUrl;
     }
 
     @Override
@@ -57,10 +58,14 @@ class UserPostsAdapter extends RecyclerView.Adapter<UserPostsAdapter.ViewHolder>
 
     class ViewHolder extends RecyclerView.ViewHolder {
         ImageView imageView;
+        int postId;
+        String imageUrl;
 
         ViewHolder(View itemView) {
             super(itemView);
             imageView = (ImageView) itemView.findViewById(R.id.activity_user_recycler_view_cell_image_view);
+            imageView.setOnClickListener(imageView ->
+                    presenter.onPostClicked(postId, this.imageView, this.imageUrl));
         }
     }
 }

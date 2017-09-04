@@ -4,15 +4,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SearchView;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.githib.rcd27.instagrallax.R;
 import com.githib.rcd27.instagrallax.post.PostActivity;
-import com.githib.rcd27.instagrallax.search.SearchActivity;
 import com.jakewharton.picasso.OkHttp3Downloader;
 import com.squareup.picasso.Picasso;
 
@@ -35,7 +35,7 @@ public class UserActivity extends AppCompatActivity implements UserContract.View
                 .build();
         UserPostsAdapter userPostsAdapter = new UserPostsAdapter(picasso, presenter);
         recyclerView.setAdapter(userPostsAdapter);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(), 2);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
         recyclerView.setLayoutManager(gridLayoutManager);
 
         int currentUserId = getIntent().getExtras().getInt("USER_ID");
@@ -53,9 +53,13 @@ public class UserActivity extends AppCompatActivity implements UserContract.View
     }
 
     @Override
-    public void startPostActivity(int postId) {
+    public void startPostActivity(int postId, @NonNull ImageView imageView, @NonNull String imageUrl) {
         Intent intent = new Intent(getApplicationContext(), PostActivity.class);
         intent.putExtra("POST_ID", postId);
-        startActivity(intent);
+        intent.putExtra("IMAGE_URL", imageUrl);
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                this, imageView, "sharedImageView"
+        );
+        startActivity(intent, options.toBundle());
     }
 }

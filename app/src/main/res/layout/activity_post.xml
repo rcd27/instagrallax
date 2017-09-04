@@ -9,16 +9,16 @@
         android:id="@+id/activity_post_image_view"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:layout_weight="0"
-        android:contentDescription="@string/image_view_description" />
+        android:contentDescription="@string/image_view_description"
+        android:scaleType="centerCrop"
+        android:transitionName="sharedImageView" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/activity_post_recycler_view"
+    <ListView
+        android:id="@+id/activity_post_list_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         android:paddingBottom="8dp"
-        android:paddingEnd="16dp"
-        android:paddingStart="16dp"
         android:paddingTop="8dp" />
 
 </LinearLayout>
