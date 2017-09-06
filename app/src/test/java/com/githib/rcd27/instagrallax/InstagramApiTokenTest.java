@@ -4,7 +4,7 @@ package com.githib.rcd27.instagrallax;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import com.githib.rcd27.instagrallax.net.Api;
+import com.githib.rcd27.instagrallax.net.InstagramApi;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -20,8 +20,8 @@ import retrofit2.Converter;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
-public class ApiTokenTest {
-    Api api;
+public class InstagramApiTokenTest {
+    InstagramApi instagramApi;
 
     @Before
     public void prepareRetrofit() {
@@ -30,7 +30,7 @@ public class ApiTokenTest {
                 .build();
 
         Retrofit.Builder builder = new Retrofit.Builder();
-        Retrofit retrofit = builder.baseUrl("https://api.instagram.com")
+        Retrofit retrofit = builder.baseUrl("https://instagramApi.instagram.com")
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(new Converter.Factory() {
                     @Nullable
@@ -46,7 +46,7 @@ public class ApiTokenTest {
                 })
                 .client(client)
                 .build();
-        api = retrofit.create(Api.class);
+        instagramApi = retrofit.create(InstagramApi.class);
     }
 
     /**
@@ -54,7 +54,7 @@ public class ApiTokenTest {
      */
     @Test
     public void testWhatWeHave() {
-        api.getToken("efb6703a97aa428883a860f87f5f66e7",
+        instagramApi.getToken("efb6703a97aa428883a860f87f5f66e7",
                 "7b3d9f073b7f48b9808cb8751ea98361",
                 "http://github.com/rcd27",
                 "token")

@@ -1,7 +1,7 @@
 package com.githib.rcd27.instagrallax;
 
 
-import com.githib.rcd27.instagrallax.net.Api;
+import com.githib.rcd27.instagrallax.net.InstagramApi;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -13,7 +13,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class SelfTest {
-    Api api;
+    InstagramApi instagramApi;
 
     @Before
     public void prepareRetrofit() {
@@ -25,17 +25,17 @@ public class SelfTest {
                 .build();
 
         Retrofit.Builder builder = new Retrofit.Builder();
-        Retrofit retrofit = builder.baseUrl("https://api.instagram.com")
+        Retrofit retrofit = builder.baseUrl("https://instagramApi.instagram.com")
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build();
-        api = retrofit.create(Api.class);
+        instagramApi = retrofit.create(InstagramApi.class);
     }
 
     @Test
     public void selfMediaTest() {
-        api.getSelfMediaRecentData("5968608397.efb6703.e766cc20812c4842ab903edded1148c9")
+        instagramApi.getSelfMediaRecentData("5968608397.efb6703.e766cc20812c4842ab903edded1148c9")
                 .subscribe(response -> {
                     System.out.println(response.data.get(0).id);
                 });

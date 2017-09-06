@@ -9,9 +9,13 @@ import com.githib.rcd27.instagrallax.data.UserRepository;
 import io.reactivex.Observable;
 
 
-class SearchModel implements SearchContract.Model {
+public class SearchModel implements SearchContract.Model {
 
-    private UserRepository userRepository = UserRepository.getInstance();
+    private final UserRepository userRepository;
+
+    public SearchModel(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     @Override
     public Observable<SparseArray<String>> getSuggestions(@NonNull String forQuery) {
@@ -21,5 +25,10 @@ class SearchModel implements SearchContract.Model {
     @Override
     public Observable<SparseArray<String>> getAllSuggestions() {
         return userRepository.getAllSuggestions();
+    }
+
+    @Override
+    public Observable<String> getUserById(int id) {
+        return null;
     }
 }

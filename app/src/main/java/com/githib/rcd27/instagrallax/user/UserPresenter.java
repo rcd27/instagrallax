@@ -4,7 +4,9 @@ package com.githib.rcd27.instagrallax.user;
 import android.support.annotation.NonNull;
 import android.widget.ImageView;
 
+import com.githib.rcd27.instagrallax.dagger.SearchModule;
 import com.githib.rcd27.instagrallax.data.UserRepository;
+import com.githib.rcd27.instagrallax.search.SearchContract;
 
 class UserPresenter implements UserContract.Presenter {
 
@@ -13,7 +15,8 @@ class UserPresenter implements UserContract.Presenter {
 
     UserPresenter(UserContract.View view) {
         this.view = view;
-        this.userRepository = UserRepository.getInstance();
+        // FIXME
+        this.userRepository = new UserRepository(null);
     }
 
     @Override

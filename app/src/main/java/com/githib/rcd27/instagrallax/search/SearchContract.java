@@ -9,7 +9,7 @@ import android.util.SparseArray;
 import io.reactivex.Observable;
 
 
-interface SearchContract {
+public interface SearchContract {
 
     interface Model {
 
@@ -17,6 +17,8 @@ interface SearchContract {
         Observable<SparseArray<String>> getSuggestions(@NonNull String forQuery);
 
         Observable<SparseArray<String>> getAllSuggestions();
+
+        Observable<String> getUserById(int id);
     }
 
     interface View {

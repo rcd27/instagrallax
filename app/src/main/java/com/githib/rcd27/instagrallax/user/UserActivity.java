@@ -28,6 +28,7 @@ public class UserActivity extends AppCompatActivity implements UserContract.View
         setContentView(R.layout.activity_user);
 
         recyclerView = (RecyclerView) findViewById(R.id.activity_user_recycler_view);
+
         presenter = new UserPresenter(this);
 
         Picasso picasso = new Picasso.Builder(getApplicationContext())

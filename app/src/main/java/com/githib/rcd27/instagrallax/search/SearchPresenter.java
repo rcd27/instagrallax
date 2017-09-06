@@ -9,14 +9,14 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
 
-class SearchPresenter implements SearchContract.Presenter {
+public class SearchPresenter implements SearchContract.Presenter {
 
     private final SearchContract.Model model;
     private final SearchContract.View view;
 
-    public SearchPresenter(SearchContract.View view) {
+    public SearchPresenter(SearchContract.View view, SearchContract.Model model) {
         this.view = view;
-        this.model = new SearchModel();
+        this.model = model;
     }
 
     // TODO тут выполняется по сути работа FilterQueryProvider. Изучить.

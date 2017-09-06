@@ -4,17 +4,21 @@ package com.githib.rcd27.instagrallax.data;
 import android.support.annotation.NonNull;
 import android.util.SparseArray;
 
+import com.githib.rcd27.instagrallax.net.InstagramApi;
+import com.githib.rcd27.instagrallax.search.SearchContract;
+
 import java.util.Random;
 
 import io.reactivex.Observable;
 
 public class UserRepository {
 
-    private static UserRepository instance;
-
+    private final InstagramApi api;
     private final SparseArray<String> users = new SparseArray<>();
 
-    private UserRepository() {
+    public UserRepository(InstagramApi api) {
+        this.api = api;
+
         String[] SUGGESTIONS = {
                 "Иван Охлобыстин", "Андрей Кочергин", "Михаил Кокляев",
                 "Сергий Алиев", "Федор Емельяненко", "Эд Халилов",
@@ -25,13 +29,6 @@ public class UserRepository {
             int randomID = Math.abs(gimmeRandom.nextInt());
             users.put(randomID, s);
         }
-    }
-
-    public static UserRepository getInstance() {
-        if (null == instance) {
-            instance = new UserRepository();
-        }
-        return instance;
     }
 
     public Observable<SparseArray<String>> getSuggestions(@NonNull String forQuery) {

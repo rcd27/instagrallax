@@ -13,12 +13,17 @@ import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.widget.Toast;
 
+import com.githib.rcd27.instagrallax.MagnettoApp;
 import com.githib.rcd27.instagrallax.R;
+import com.githib.rcd27.instagrallax.dagger.SearchModule;
 import com.githib.rcd27.instagrallax.user.UserActivity;
+
+import javax.inject.Inject;
 
 public class SearchActivity extends AppCompatActivity implements SearchContract.View {
 
-    private SearchContract.Presenter presenter;
+    @Inject
+    public SearchContract.Presenter presenter;
 
     private SimpleCursorAdapter cursorAdapter;
 
@@ -26,7 +31,10 @@ public class SearchActivity extends AppCompatActivity implements SearchContract.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
-        presenter = new SearchPresenter(this);
+
+        MagnettoApp.getInstance().getAppComponent().plus(new SearchModule(this))
+                .inject(this);
+
         //FIXME: "userName" фигурирует в презентере. Перенести создание адаптера и курсора в одно место.
         cursorAdapter = new SimpleCursorAdapter(
                 SearchActivity.this,
