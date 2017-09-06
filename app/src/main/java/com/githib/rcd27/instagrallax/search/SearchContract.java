@@ -31,7 +31,7 @@ public interface SearchContract {
 
     interface Presenter {
 
-        /* Обновляет список getSuggestions для поиска */
+        /* Обновляет список getMockSuggestions для поиска */
         MatrixCursor getCursorFor(@NonNull String query);
 
         void goToUserIfExists(@Nullable String query);

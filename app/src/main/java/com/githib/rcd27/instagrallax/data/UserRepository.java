@@ -5,7 +5,6 @@ import android.support.annotation.NonNull;
 import android.util.SparseArray;
 
 import com.githib.rcd27.instagrallax.net.InstagramApi;
-import com.githib.rcd27.instagrallax.search.SearchContract;
 
 import java.util.Random;
 
@@ -31,7 +30,7 @@ public class UserRepository {
         }
     }
 
-    public Observable<SparseArray<String>> getSuggestions(@NonNull String forQuery) {
+    public Observable<SparseArray<String>> getMockSuggestions(@NonNull String forQuery) {
         return Observable.just(users);
     }
 

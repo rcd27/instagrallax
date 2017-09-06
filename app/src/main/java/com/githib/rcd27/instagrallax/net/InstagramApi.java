@@ -16,4 +16,8 @@ public interface InstagramApi {
     /* Смотрим посты юзера, на которого зарегистрирован access_token*/
     @GET("v1/users/self/media/recent")
     Observable<MediaData> getSelfMediaRecentData(@Query("access_token") String accessToken);
+
+    @GET("v1/users/search")
+    Observable<SearchResult> searchUser(@Query("q") String searchQuery ,
+                                        @Query("access_token") String accessToken);
 }

@@ -19,7 +19,7 @@ public class SearchModel implements SearchContract.Model {
 
     @Override
     public Observable<SparseArray<String>> getSuggestions(@NonNull String forQuery) {
-        return userRepository.getSuggestions(forQuery);
+        return userRepository.getMockSuggestions(forQuery);
     }
 
     @Override
