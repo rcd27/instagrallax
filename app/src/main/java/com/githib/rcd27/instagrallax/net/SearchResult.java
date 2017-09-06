@@ -30,7 +30,7 @@ public class SearchResult {
 
     public static class Data {
         @SerializedName("id")
-        private String id;
+        private long id;
         @SerializedName("username")
         private String username;
         @SerializedName("profile_picture")
@@ -44,11 +44,11 @@ public class SearchResult {
         @SerializedName("is_business")
         private boolean is_business;
 
-        public String getId() {
+        public long getId() {
             return id;
         }
 
-        public void setId(String id) {
+        public void setId(long id) {
             this.id = id;
         }
 

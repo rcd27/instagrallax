@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
+//TODO сравнить MediaData, SearchResult, UserRecentMedia, выявить общие DTO.
 public class MediaData {
 
     @SerializedName("pagination")
