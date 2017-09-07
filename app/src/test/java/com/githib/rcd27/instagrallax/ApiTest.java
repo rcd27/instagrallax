@@ -55,14 +55,14 @@ public class ApiTest {
     }
 
     @Test
-    public void searchTest() {
+    public void search_test() {
         api.searchUser("Ста", ACCESS_TOKEN)
-                .subscribe(userData -> assertEquals(
-                        SELF_FULL_NAME, userData.getData().get(0).getFull_name()));
+                .subscribe(userData ->
+                        assertEquals(SELF_FULL_NAME, userData.getData().get(0).getFull_name()));
     }
 
     @Test
-    public void idTest() {
+    public void id_test() {
         api.searchUser(SELF_FULL_NAME, ACCESS_TOKEN)
                 .subscribe(userData -> idContainer[0] = userData.getData().get(0).getId());
         Assert.assertNotNull(idContainer[0]);

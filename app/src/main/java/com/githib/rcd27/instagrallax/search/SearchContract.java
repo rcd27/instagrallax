@@ -6,6 +6,8 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.SparseArray;
 
+import java.util.List;
+
 import io.reactivex.Observable;
 
 
@@ -19,6 +21,9 @@ public interface SearchContract {
         Observable<SparseArray<String>> getAllSuggestions();
 
         Observable<String> getUserById(int id);
+
+        Observable<List<SearchUser>> getSearchUserList(@NonNull String forQuery);
+
     }
 
     interface View {

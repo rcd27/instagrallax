@@ -22,18 +22,19 @@ public class SearchPresenter implements SearchContract.Presenter {
     // TODO тут выполняется по сути работа FilterQueryProvider. Изучить.
     @Override
     public MatrixCursor getCursorFor(@Nullable String query) {
+        // FIXME поиск отрабатывает, нужный курсор возвращается, но UI не отображает
         final MatrixCursor mc = new MatrixCursor(new String[]{BaseColumns._ID, "instId", "userName"});
         if (null != query) {
-            model.getSuggestions(query)
+            model.getSearchUserList(query)
+                    // TODO перенести в Transformer
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .doOnError(throwable -> view.showError(throwable.getMessage()))
-                    .subscribe(users -> {
-                        for (int i = 0; i < users.size(); i++) {
-                            int currentKey = users.keyAt(i);
-                            String currentUser = users.get(currentKey);
-                            if (currentUser.toLowerCase().startsWith(query.toLowerCase())) {
-                                mc.addRow(new Object[]{i, currentKey, currentUser});
+                    .subscribe(searchUsers -> {
+                        for (int i = 0; i < searchUsers.size(); i++) {
+                            //TODO перенести фильтрацию в Model слой
+                            SearchUser currentUser = searchUsers.get(i);
+                            if (currentUser.getFullName().toLowerCase().startsWith(query.toLowerCase())) {
+                                mc.addRow(new Object[]{i, currentUser.getId(), currentUser.getFullName()});
                             }
                         }
                     });
