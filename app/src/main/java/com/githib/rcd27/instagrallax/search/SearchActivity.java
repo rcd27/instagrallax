@@ -28,12 +28,13 @@ import static com.githib.rcd27.instagrallax.user.UserActivity.USER_ID;
 
 public class SearchActivity extends AppCompatActivity implements SearchContract.View {
 
-    private static final String CURSOR_USER_NAME = "USER_NAME";
-    private static final String CURSOR_INST_ID = "INST_ID";
+    public static final String CURSOR_USER_NAME = "USER_NAME";
+    public static final String CURSOR_INST_ID = "INST_ID";
 
     @Inject
     public SearchContract.Presenter presenter;
 
+    private SearchManager searchManager;
     private SearchView searchView;
     private SimpleCursorAdapter cursorAdapter;
 
@@ -45,6 +46,8 @@ public class SearchActivity extends AppCompatActivity implements SearchContract.
         MagnettoApp.getInstance().getAppComponent().plus(new SearchModule(this))
                 .inject(this);
 
+        searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        // TODO убрать в DI
         cursorAdapter = new SimpleCursorAdapter(
                 SearchActivity.this,
                 R.layout.support_simple_spinner_dropdown_item,
@@ -60,58 +63,12 @@ public class SearchActivity extends AppCompatActivity implements SearchContract.
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_search, menu);
 
-        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-
         searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
         searchView.setIconified(false);
         searchView.setSuggestionsAdapter(cursorAdapter);
-
-        searchView.setOnSuggestionListener(new SearchView.OnSuggestionListener() {
-            @Override
-            public boolean onSuggestionSelect(int position) {
-                Toast.makeText(getApplicationContext(),
-                        "Suggestion has been selected",
-                        Toast.LENGTH_SHORT).show();
-                return true;
-            }
-
-            @Override
-            public boolean onSuggestionClick(int position) {
-                CursorAdapter ca = searchView.getSuggestionsAdapter();
-                Cursor cursor = ca.getCursor();
-                cursor.moveToPosition(position);
-
-                showUser(cursor.getInt(cursor.getColumnIndex(CURSOR_INST_ID)));
-                return true;
-            }
-        });
-
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                presenter.goToUserIfExists(query);
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                return false;
-            }
-        });
-
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                presenter.procedeUserSearch(newText);
-                return false;
-            }
-        });
+        searchView.setOnSuggestionListener(new SearchViewSuggestionListener());
+        searchView.setOnQueryTextListener(new SearchViewQueryListener());
 
         return true;
     }
@@ -146,5 +103,39 @@ public class SearchActivity extends AppCompatActivity implements SearchContract.
             cursorAdapter.getCursor().close();
         }
         super.onStop();
+    }
+
+    private class SearchViewSuggestionListener implements SearchView.OnSuggestionListener {
+
+        @Override
+        public boolean onSuggestionSelect(int position) {
+            return true;
+        }
+
+        @Override
+        public boolean onSuggestionClick(int position) {
+            CursorAdapter ca = searchView.getSuggestionsAdapter();
+            Cursor cursor = ca.getCursor();
+            cursor.moveToPosition(position);
+
+            showUser(cursor.getInt(cursor.getColumnIndex(CURSOR_INST_ID)));
+            return true;
+        }
+    }
+
+    private class SearchViewQueryListener implements SearchView.OnQueryTextListener {
+
+        @Override
+        public boolean onQueryTextSubmit(String query) {
+            return false;
+        }
+
+        @Override
+        public boolean onQueryTextChange(String newText) {
+            if (!newText.isEmpty()) {
+                presenter.procedeUserSearch(newText);
+            }
+            return false;
+        }
     }
 }

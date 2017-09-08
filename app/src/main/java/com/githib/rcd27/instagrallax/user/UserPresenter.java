@@ -4,9 +4,7 @@ package com.githib.rcd27.instagrallax.user;
 import android.support.annotation.NonNull;
 import android.widget.ImageView;
 
-import com.githib.rcd27.instagrallax.dagger.SearchModule;
 import com.githib.rcd27.instagrallax.data.UserRepository;
-import com.githib.rcd27.instagrallax.search.SearchContract;
 
 class UserPresenter implements UserContract.Presenter {
 
@@ -21,7 +19,7 @@ class UserPresenter implements UserContract.Presenter {
 
     @Override
     public void getUserNameById(int currentUserId) {
-        userRepository.getUserById(currentUserId)
+        userRepository.getFakeUserById(currentUserId)
                 .doOnError(throwable -> view.showError())
                 .subscribe(view::setTitleForCurrentUser);
     }

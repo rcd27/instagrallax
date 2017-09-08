@@ -4,6 +4,7 @@ package com.githib.rcd27.instagrallax.data;
 import android.support.annotation.NonNull;
 import android.util.SparseArray;
 
+import com.githib.rcd27.instagrallax.MagnettoApp;
 import com.githib.rcd27.instagrallax.net.InstagramApi;
 import com.githib.rcd27.instagrallax.search.SearchUser;
 import com.githib.rcd27.instagrallax.search.SearchUserMapper;
@@ -33,15 +34,7 @@ public class UserRepository {
         }
     }
 
-    public Observable<SparseArray<String>> getMockSuggestions(@NonNull String forQuery) {
-        return Observable.just(users);
-    }
-
-    public Observable<SparseArray<String>> getAllSuggestions() {
-        return Observable.just(users);
-    }
-
-    public Observable<String> getUserById(int id) {
+    public Observable<String> getFakeUserById(int id) {
         String result = users.get(id);
         if (null != result) {
             return Observable.just(users.get(id));
@@ -50,7 +43,8 @@ public class UserRepository {
     }
 
     public Observable<List<SearchUser>> getSearchUserList(@NonNull String forQuery) {
-        return api.searchUser(forQuery, "5968608397.efb6703.e766cc20812c4842ab903edded1148c9")
+        // TODO убрать access_token вниз
+        return api.searchUser(forQuery, MagnettoApp.ACCESS_TOKEN)
                 .map(new SearchUserMapper());
     }
 }

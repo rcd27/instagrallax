@@ -15,11 +15,6 @@ public interface SearchContract {
 
     interface Model {
 
-        /* Предоставляет список SUGGESTIONS */
-        Observable<SparseArray<String>> getSuggestions(@NonNull String forQuery);
-
-        Observable<SparseArray<String>> getAllSuggestions();
-
         Observable<String> getUserById(int id);
 
         Observable<List<SearchUser>> getSearchUserList(@NonNull String forQuery);
