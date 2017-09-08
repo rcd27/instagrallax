@@ -4,7 +4,9 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.database.MatrixCursor;
 import android.os.Bundle;
+import android.provider.BaseColumns;
 import android.support.annotation.NonNull;
 import android.support.v4.widget.CursorAdapter;
 import android.support.v4.widget.SimpleCursorAdapter;
@@ -18,13 +20,21 @@ import com.githib.rcd27.instagrallax.R;
 import com.githib.rcd27.instagrallax.dagger.SearchModule;
 import com.githib.rcd27.instagrallax.user.UserActivity;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
+import static com.githib.rcd27.instagrallax.user.UserActivity.USER_ID;
+
 public class SearchActivity extends AppCompatActivity implements SearchContract.View {
+
+    private static final String CURSOR_USER_NAME = "USER_NAME";
+    private static final String CURSOR_INST_ID = "INST_ID";
 
     @Inject
     public SearchContract.Presenter presenter;
 
+    private SearchView searchView;
     private SimpleCursorAdapter cursorAdapter;
 
     @Override
@@ -35,17 +45,15 @@ public class SearchActivity extends AppCompatActivity implements SearchContract.
         MagnettoApp.getInstance().getAppComponent().plus(new SearchModule(this))
                 .inject(this);
 
-        //FIXME: "userName" фигурирует в презентере. Перенести создание адаптера и курсора в одно место.
         cursorAdapter = new SimpleCursorAdapter(
                 SearchActivity.this,
                 R.layout.support_simple_spinner_dropdown_item,
                 null,
                 // Колонка, которую показываем в списке
-                new String[]{"userName"},
+                new String[]{CURSOR_USER_NAME},
                 new int[]{android.R.id.text1},
                 CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER
         );
-        cursorAdapter.setFilterQueryProvider(query -> presenter.getCursorFor((String) query));
     }
 
     @Override
@@ -53,8 +61,8 @@ public class SearchActivity extends AppCompatActivity implements SearchContract.
         getMenuInflater().inflate(R.menu.menu_search, menu);
 
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
 
+        searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
         searchView.setIconified(false);
         searchView.setSuggestionsAdapter(cursorAdapter);
@@ -74,7 +82,7 @@ public class SearchActivity extends AppCompatActivity implements SearchContract.
                 Cursor cursor = ca.getCursor();
                 cursor.moveToPosition(position);
 
-                showUser(cursor.getInt(cursor.getColumnIndex("instId")));
+                showUser(cursor.getInt(cursor.getColumnIndex(CURSOR_INST_ID)));
                 return true;
             }
         });
@@ -92,6 +100,19 @@ public class SearchActivity extends AppCompatActivity implements SearchContract.
             }
         });
 
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                presenter.procedeUserSearch(newText);
+                return false;
+            }
+        });
+
         return true;
     }
 
@@ -103,8 +124,19 @@ public class SearchActivity extends AppCompatActivity implements SearchContract.
     @Override
     public void showUser(int userId) {
         Intent goToUserActivity = new Intent(getApplicationContext(), UserActivity.class);
-        goToUserActivity.putExtra("USER_ID", userId);
+        goToUserActivity.putExtra(USER_ID, userId);
         startActivity(goToUserActivity);
+    }
+
+    @Override
+    public void showSuggestions(List<SearchUser> users) {
+        final MatrixCursor mc = new MatrixCursor(new String[]{BaseColumns._ID,
+                CURSOR_INST_ID, CURSOR_USER_NAME});
+        for (int i = 0; i < users.size(); i++) {
+            SearchUser currentUser = users.get(i);
+            mc.addRow(new Object[]{i, currentUser.getId(), currentUser.getFullName()});
+        }
+        cursorAdapter.changeCursor(mc);
     }
 
     @Override

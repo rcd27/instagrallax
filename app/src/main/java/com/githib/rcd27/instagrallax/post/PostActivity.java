@@ -15,6 +15,9 @@ import com.squareup.picasso.Picasso;
 
 public class PostActivity extends AppCompatActivity {
 
+    public static final String POST_ID = "POST_ID";
+    public static final String IMAGE_URL = "UMAGE_URL";
+
     @SuppressWarnings("FieldCanBeLocal")
     private ListView listView;
     private ImageView imageView;
@@ -31,7 +34,7 @@ public class PostActivity extends AppCompatActivity {
         // see: http://www.androiddesignpatterns.com/2015/03/activity-postponed-shared-element-transitions-part3b.html
         postponeEnterTransition(); // temporarily prevent shared element transition.
         Picasso.with(this)
-                .load(getIntent().getExtras().getString("IMAGE_URL"))
+                .load(getIntent().getExtras().getString(IMAGE_URL))
                 .into(imageView, new Callback() {
                     @Override
                     public void onSuccess() {
@@ -48,7 +51,7 @@ public class PostActivity extends AppCompatActivity {
                 android.R.layout.simple_list_item_1, PostRepository.getInstance().getComments());
         listView.setAdapter(adapter);
 
-        int currentPostID = getIntent().getExtras().getInt("POST_ID");
+        int currentPostID = getIntent().getExtras().getInt(POST_ID);
         setTitle("id#" + currentPostID);
     }
 

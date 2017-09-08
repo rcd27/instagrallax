@@ -32,13 +32,14 @@ public interface SearchContract {
 
         void showUser(int userId);
 
+        void showSuggestions(List<SearchUser> users);
+
     }
 
     interface Presenter {
 
-        /* Обновляет список getMockSuggestions для поиска */
-        MatrixCursor getCursorFor(@NonNull String query);
-
         void goToUserIfExists(@Nullable String query);
+
+        void procedeUserSearch(@NonNull String query);
     }
 }

@@ -16,12 +16,17 @@ import com.githib.rcd27.instagrallax.post.PostActivity;
 import com.jakewharton.picasso.OkHttp3Downloader;
 import com.squareup.picasso.Picasso;
 
+import static com.githib.rcd27.instagrallax.post.PostActivity.IMAGE_URL;
+import static com.githib.rcd27.instagrallax.post.PostActivity.POST_ID;
+
 
 public class UserActivity extends AppCompatActivity implements UserContract.View {
 
-    RecyclerView recyclerView;
+    public static final String USER_ID = "USER_ID";
 
-    UserContract.Presenter presenter;
+    private RecyclerView recyclerView;
+
+    private UserContract.Presenter presenter;
 
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +44,7 @@ public class UserActivity extends AppCompatActivity implements UserContract.View
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
         recyclerView.setLayoutManager(gridLayoutManager);
 
-        int currentUserId = getIntent().getExtras().getInt("USER_ID");
+        int currentUserId = getIntent().getExtras().getInt(USER_ID);
         presenter.getUserNameById(currentUserId);
     }
 
@@ -56,8 +61,8 @@ public class UserActivity extends AppCompatActivity implements UserContract.View
     @Override
     public void startPostActivity(int postId, @NonNull ImageView imageView, @NonNull String imageUrl) {
         Intent intent = new Intent(getApplicationContext(), PostActivity.class);
-        intent.putExtra("POST_ID", postId);
-        intent.putExtra("IMAGE_URL", imageUrl);
+        intent.putExtra(POST_ID, postId);
+        intent.putExtra(IMAGE_URL, imageUrl);
         ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(
                 this, imageView, "sharedImageView"
         );
