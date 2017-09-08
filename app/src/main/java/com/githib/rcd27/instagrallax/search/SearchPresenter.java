@@ -32,8 +32,6 @@ public class SearchPresenter implements SearchContract.Presenter {
     @Override
     public void procedeUserSearch(@NonNull String query) {
         model.getSearchUserList(query)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(view::showSuggestions);
     }
 }

@@ -36,16 +36,12 @@ public class UserPresenter implements UserContract.Presenter {
     @Override
     public void procedeUserName() {
         model.getUserNameById(currentUserId)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(view::setTitleForCurrentUser);
     }
 
     @Override
     public void procedePosts() {
         model.getUserPosts(currentUserId)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(view::setAdapterForRecyclerView);
     }
 
