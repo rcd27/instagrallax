@@ -3,8 +3,6 @@ package com.githib.rcd27.instagrallax.dagger;
 
 import android.content.Context;
 
-import javax.inject.Singleton;
-
 import dagger.Module;
 import dagger.Provides;
 
@@ -18,7 +16,6 @@ public class ApplicationModule {
     }
 
     @Provides
-    @Singleton
     Context provideContext() {
         return context;
     }

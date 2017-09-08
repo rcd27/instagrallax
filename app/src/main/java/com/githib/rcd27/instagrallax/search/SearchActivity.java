@@ -79,7 +79,7 @@ public class SearchActivity extends AppCompatActivity implements SearchContract.
     }
 
     @Override
-    public void showUser(int userId) {
+    public void showUser(long userId) {
         Intent goToUserActivity = new Intent(getApplicationContext(), UserActivity.class);
         goToUserActivity.putExtra(USER_ID, userId);
         startActivity(goToUserActivity);
@@ -118,7 +118,7 @@ public class SearchActivity extends AppCompatActivity implements SearchContract.
             Cursor cursor = ca.getCursor();
             cursor.moveToPosition(position);
 
-            showUser(cursor.getInt(cursor.getColumnIndex(CURSOR_INST_ID)));
+            showUser(cursor.getLong(cursor.getColumnIndex(CURSOR_INST_ID)));
             return true;
         }
     }

@@ -40,7 +40,6 @@ public class NetworkModule {
     }
 
     @Provides
-    @Singleton
     public InstagramApi provideApiInterface(Context context) {
         OkHttpClient httpClient = new OkHttpClient.Builder()
                 .connectTimeout(CONNECT_TIMEOUT, TimeUnit.SECONDS)
@@ -113,7 +112,6 @@ public class NetworkModule {
     }
 
     @Provides
-    @Singleton
     public Picasso providePicasso(Context context) {
         Picasso picasso = new Picasso.Builder(context)
                 .downloader(new OkHttp3Downloader(context, CACHE_SIZE * 2))

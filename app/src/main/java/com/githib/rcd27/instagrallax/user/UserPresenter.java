@@ -4,28 +4,45 @@ package com.githib.rcd27.instagrallax.user;
 import android.support.annotation.NonNull;
 import android.widget.ImageView;
 
-import com.githib.rcd27.instagrallax.data.UserRepository;
+import com.githib.rcd27.instagrallax.data.Model;
 
-class UserPresenter implements UserContract.Presenter {
+import java.util.List;
+
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
+
+public class UserPresenter implements UserContract.Presenter {
 
     private final UserContract.View view;
-    private final UserRepository userRepository;
+    private final Model model;
+    private long currentUserId;
 
-    UserPresenter(UserContract.View view) {
+    @Override
+    public void setCurrentUserId(long id) {
+        this.currentUserId = id;
+    }
+
+    public UserPresenter(UserContract.View view, Model model) {
         this.view = view;
-        // FIXME
-        this.userRepository = new UserRepository(null);
+        this.model = model;
     }
 
     @Override
-    public void getUserNameById(int currentUserId) {
-        userRepository.getFakeUserById(currentUserId)
-                .doOnError(throwable -> view.showError())
+    public Observable<List<UserPost>> getUserPosts() {
+        return model.getUserPosts(currentUserId);
+    }
+
+    @Override
+    public void procedeUserName() {
+        model.getUserNameById(currentUserId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(view::setTitleForCurrentUser);
     }
 
     @Override
-    public void onPostClicked(int postId, @NonNull ImageView clicked, @NonNull String imageUrl) {
+    public void onPostClicked(String postId, @NonNull ImageView clicked, @NonNull String imageUrl) {
         view.startPostActivity(postId, clicked, imageUrl);
     }
 }

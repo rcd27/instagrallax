@@ -4,7 +4,11 @@ package com.githib.rcd27.instagrallax.user;
 import android.support.annotation.NonNull;
 import android.widget.ImageView;
 
-interface UserContract {
+import java.util.List;
+
+import io.reactivex.Observable;
+
+public interface UserContract {
 
     interface View {
 
@@ -12,13 +16,17 @@ interface UserContract {
 
         void setTitleForCurrentUser(@NonNull String userName);
 
-        void startPostActivity(int postId, @NonNull ImageView imageView, @NonNull String imageUrl);
+        void startPostActivity(String postId, @NonNull ImageView imageView, @NonNull String imageUrl);
     }
 
     interface Presenter {
 
-        void getUserNameById(int currentUserId);
+        void setCurrentUserId(long id);
 
-        void onPostClicked(int postId, @NonNull ImageView view, @NonNull String imageUrl);
+        Observable<List<UserPost>> getUserPosts();
+
+        void procedeUserName();
+
+        void onPostClicked(String postId, @NonNull ImageView view, @NonNull String imageUrl);
     }
 }
