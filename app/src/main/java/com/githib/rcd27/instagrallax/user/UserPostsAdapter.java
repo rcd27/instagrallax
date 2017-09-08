@@ -46,11 +46,12 @@ class UserPostsAdapter extends RecyclerView.Adapter<UserPostsAdapter.ViewHolder>
     @Override
     public void onBindViewHolder(UserPostsAdapter.ViewHolder holder, int position) {
         UserPost currentPost = userPosts.get(position);
-        String thumbnailUrl = currentPost.getThumbnail().url;
-        picasso.load(thumbnailUrl)
+        String lowResolution = currentPost.getLowResolution().url;
+        picasso.load(lowResolution)
                 .into(holder.imageView);
         holder.postId = currentPost.getId();
-        holder.thumbnailUrl = thumbnailUrl;
+        holder.thumbnailUrl = currentPost.getThumbnail().url;
+        holder.lowResolutionUrl = lowResolution;
         holder.standartResolutionUrl = currentPost.getStandart().url;
     }
 
@@ -63,6 +64,7 @@ class UserPostsAdapter extends RecyclerView.Adapter<UserPostsAdapter.ViewHolder>
         ImageView imageView;
         String postId;
         String thumbnailUrl;
+        String lowResolutionUrl;
         String standartResolutionUrl;
 
         ViewHolder(View itemView) {

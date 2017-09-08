@@ -35,4 +35,13 @@ public class UserPost {
         }
         return new PostImage("no image", 0, 0, "https://avatars3.githubusercontent.com/u/20042955?v=4&s=460");
     }
+
+    public PostImage getLowResolution() {
+        for (PostImage pi : images) {
+            if (pi.category.equals(UserMediaToUserPostsMapper.STANDERT_RESOLUTION)) {
+                return pi;
+            }
+        }
+        return new PostImage("no image", 0, 0, "https://avatars3.githubusercontent.com/u/20042955?v=4&s=460");
+    }
 }
