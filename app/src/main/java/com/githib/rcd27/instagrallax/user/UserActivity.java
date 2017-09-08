@@ -56,6 +56,7 @@ public class UserActivity extends AppCompatActivity implements UserContract.View
         presenter.setCurrentUserId(currentUserId);
 
         // FIXME убрать этот трэшак
+        // FIXME: отрабатывает в другом потоке, в адаптер падает пустой лист, а потом он заполняется
         final List<UserPost> userPosts = new ArrayList<>();
         presenter.getUserPosts()
                 .subscribeOn(Schedulers.io())
