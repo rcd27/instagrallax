@@ -38,6 +38,7 @@ public class UserActivity extends AppCompatActivity implements UserContract.View
 
     @Inject
     public UserContract.Presenter presenter;
+    private long currentUserId;
 
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,31 +48,25 @@ public class UserActivity extends AppCompatActivity implements UserContract.View
 
         MagnettoApp.getInstance().getAppComponent().plus(new UserModule(this)).inject(this);
 
+        currentUserId = getIntent().getExtras().getLong(USER_ID);
+        presenter.setCurrentUserId(currentUserId);
+
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
+        recyclerView.setLayoutManager(gridLayoutManager);
+
+        presenter.procedeUserName();
+        presenter.procedePosts();
+    }
+
+    @Override
+    public void setAdapterForRecyclerView(List<UserPost> posts) {
         // TODO убрать в DI
         Picasso picasso = new Picasso.Builder(getApplicationContext())
                 .downloader(new OkHttp3Downloader(getApplicationContext(), 10 * 1024 * 1024))
                 .build();
 
-        long currentUserId = getIntent().getExtras().getLong(USER_ID);
-        presenter.setCurrentUserId(currentUserId);
-
-        // FIXME убрать этот трэшак
-        // FIXME: отрабатывает в другом потоке, в адаптер падает пустой лист, а потом он заполняется
-        final List<UserPost> userPosts = new ArrayList<>();
-        presenter.getUserPosts()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(posts -> {
-                    for (UserPost up : posts) {
-                        userPosts.add(up);
-                    }
-                });
-        UserPostsAdapter userPostsAdapter = new UserPostsAdapter(picasso, presenter, userPosts);
+        UserPostsAdapter userPostsAdapter = new UserPostsAdapter(picasso, presenter, posts);
         recyclerView.setAdapter(userPostsAdapter);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
-        recyclerView.setLayoutManager(gridLayoutManager);
-
-        presenter.procedeUserName();
     }
 
     @Override

@@ -42,6 +42,14 @@ public class UserPresenter implements UserContract.Presenter {
     }
 
     @Override
+    public void procedePosts() {
+        model.getUserPosts(currentUserId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(view::setAdapterForRecyclerView);
+    }
+
+    @Override
     public void onPostClicked(String postId, @NonNull ImageView clicked, @NonNull String imageUrl) {
         view.startPostActivity(postId, clicked, imageUrl);
     }

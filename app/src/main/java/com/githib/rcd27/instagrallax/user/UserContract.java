@@ -12,6 +12,8 @@ public interface UserContract {
 
     interface View {
 
+        void setAdapterForRecyclerView(List<UserPost> posts);
+
         void showError();
 
         void setTitleForCurrentUser(@NonNull String userName);
@@ -28,5 +30,7 @@ public interface UserContract {
         void procedeUserName();
 
         void onPostClicked(String postId, @NonNull ImageView view, @NonNull String imageUrl);
+
+        void procedePosts();
     }
 }
