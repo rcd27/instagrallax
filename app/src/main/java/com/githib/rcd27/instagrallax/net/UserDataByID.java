@@ -31,8 +31,8 @@ public class UserDataByID {
         private int media;
         @SerializedName("follows")
         private int follows;
-        @SerializedName("followedBy")
-        private int followedBy;
+        @SerializedName("followed_by")
+        private int followed_by;
 
         public int getMedia() {
             return media;
@@ -50,12 +50,12 @@ public class UserDataByID {
             this.follows = follows;
         }
 
-        public int getFollowedBy() {
-            return followedBy;
+        public int getFollowed_by() {
+            return followed_by;
         }
 
-        public void setFollowedBy(int followedBy) {
-            this.followedBy = followedBy;
+        public void setFollowed_by(int followed_by) {
+            this.followed_by = followed_by;
         }
     }
 
@@ -64,16 +64,16 @@ public class UserDataByID {
         private String id;
         @SerializedName("username")
         private String username;
-        @SerializedName("profilePicture")
-        private String profilePicture;
-        @SerializedName("fullName")
-        private String fullName;
+        @SerializedName("profile_picture")
+        private String profile_picture;
+        @SerializedName("full_name")
+        private String full_name;
         @SerializedName("bio")
         private String bio;
         @SerializedName("website")
         private String website;
-        @SerializedName("isBusiness")
-        private boolean isBusiness;
+        @SerializedName("is_business")
+        private boolean is_business;
         @SerializedName("counts")
         private Counts counts;
 
@@ -93,20 +93,20 @@ public class UserDataByID {
             this.username = username;
         }
 
-        public String getProfilePicture() {
-            return profilePicture;
+        public String getProfile_picture() {
+            return profile_picture;
         }
 
-        public void setProfilePicture(String profilePicture) {
-            this.profilePicture = profilePicture;
+        public void setProfile_picture(String profile_picture) {
+            this.profile_picture = profile_picture;
         }
 
-        public String getFullName() {
-            return fullName;
+        public String getFull_name() {
+            return full_name;
         }
 
-        public void setFullName(String fullName) {
-            this.fullName = fullName;
+        public void setFull_name(String full_name) {
+            this.full_name = full_name;
         }
 
         public String getBio() {
@@ -125,12 +125,12 @@ public class UserDataByID {
             this.website = website;
         }
 
-        public boolean getBusiness() {
-            return isBusiness;
+        public boolean getIs_business() {
+            return is_business;
         }
 
-        public void setBusiness(boolean business) {
-            this.isBusiness = business;
+        public void setIs_business(boolean is_business) {
+            this.is_business = is_business;
         }
 
         public Counts getCounts() {

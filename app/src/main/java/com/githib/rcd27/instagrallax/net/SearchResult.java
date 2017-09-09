@@ -33,16 +33,16 @@ public class SearchResult {
         private long id;
         @SerializedName("username")
         private String username;
-        @SerializedName("profilePicture")
-        private String profilePicture;
-        @SerializedName("fullName")
-        private String fullName;
+        @SerializedName("profile_picture")
+        private String profile_picture;
+        @SerializedName("full_name")
+        private String full_name;
         @SerializedName("bio")
         private String bio;
         @SerializedName("website")
         private String website;
-        @SerializedName("isBusiness")
-        private boolean isBusiness;
+        @SerializedName("is_business")
+        private boolean is_business;
 
         public long getId() {
             return id;
@@ -60,20 +60,20 @@ public class SearchResult {
             this.username = username;
         }
 
-        public String getProfilePicture() {
-            return profilePicture;
+        public String getProfile_picture() {
+            return profile_picture;
         }
 
-        public void setProfilePicture(String profilePicture) {
-            this.profilePicture = profilePicture;
+        public void setProfile_picture(String profile_picture) {
+            this.profile_picture = profile_picture;
         }
 
-        public String getFullName() {
-            return fullName;
+        public String getFull_name() {
+            return full_name;
         }
 
-        public void setFullName(String fullName) {
-            this.fullName = fullName;
+        public void setFull_name(String full_name) {
+            this.full_name = full_name;
         }
 
         public String getBio() {
@@ -92,12 +92,12 @@ public class SearchResult {
             this.website = website;
         }
 
-        public boolean getBusiness() {
-            return isBusiness;
+        public boolean getIs_business() {
+            return is_business;
         }
 
-        public void setBusiness(boolean business) {
-            this.isBusiness = business;
+        public void setIs_business(boolean is_business) {
+            this.is_business = is_business;
         }
     }
 

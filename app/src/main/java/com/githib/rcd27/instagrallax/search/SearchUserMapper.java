@@ -17,9 +17,9 @@ public class SearchUserMapper
         List<SearchUser> result = new ArrayList<>();
         for (SearchResult.Data currentData : searchResult.getData()) {
             result.add(new SearchUser(currentData.getId(),
-                    currentData.getFullName(),
+                    currentData.getFull_name(),
                     currentData.getUsername(),
-                    currentData.getProfilePicture()));
+                    currentData.getProfile_picture()));
         }
         return result;
     }

@@ -45,8 +45,8 @@ public class NetworkModule {
         OkHttpClient httpClient = new OkHttpClient.Builder()
                 .connectTimeout(CONNECT_TIMEOUT, TimeUnit.SECONDS)
                 .addInterceptor(provideLoggingInterceptor())
-                .addInterceptor(provideOfflineCacheInterceptor())
-                .addNetworkInterceptor(provideCacheInterceptor())
+//                .addInterceptor(provideOfflineCacheInterceptor())
+//                .addNetworkInterceptor(provideCacheInterceptor())
                 .addInterceptor(new AccessTokenInterceptor())
                 .cache(getCache(context))
                 .build();

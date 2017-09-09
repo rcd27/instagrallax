@@ -42,7 +42,7 @@ public class UserRepository {
 
     Observable<String> getUserNameById(long id) {
         return api.getUserDataById(id)
-                .map(userDataByID -> userDataByID.getData().getFullName())
+                .map(userDataByID -> userDataByID.getData().getFull_name())
                 .compose(schedulersTransformer);
     }
 }
