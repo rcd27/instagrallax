@@ -36,27 +36,19 @@ public class SearchActivity extends AppCompatActivity implements SearchContract.
 
     private SearchManager searchManager;
     private SearchView searchView;
-    private SimpleCursorAdapter cursorAdapter;
+
+    @Inject
+    public SimpleCursorAdapter cursorAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
-        MagnettoApp.getInstance().getAppComponent().plus(new SearchModule(this))
+        MagnettoApp.getInstance().getAppComponent().plus(new SearchModule(this, SearchActivity.this))
                 .inject(this);
 
         searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        // TODO убрать в DI
-        cursorAdapter = new SimpleCursorAdapter(
-                SearchActivity.this,
-                R.layout.support_simple_spinner_dropdown_item,
-                null,
-                // Колонка, которую показываем в списке
-                new String[]{CURSOR_USER_NAME},
-                new int[]{android.R.id.text1},
-                CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER
-        );
     }
 
     @Override
@@ -105,6 +97,9 @@ public class SearchActivity extends AppCompatActivity implements SearchContract.
         super.onStop();
     }
 
+    /**
+     * Обрабатывает клик на элементе выпадающего списка SearchView
+     */
     private class SearchViewSuggestionListener implements SearchView.OnSuggestionListener {
 
         @Override
@@ -123,6 +118,9 @@ public class SearchActivity extends AppCompatActivity implements SearchContract.
         }
     }
 
+    /**
+     * Слушает изменения в TextView поиска.
+     */
     private class SearchViewQueryListener implements SearchView.OnQueryTextListener {
 
         @Override

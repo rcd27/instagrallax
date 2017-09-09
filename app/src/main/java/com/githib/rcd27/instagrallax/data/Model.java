@@ -12,8 +12,6 @@ import io.reactivex.Observable;
 
 public interface Model {
 
-    Observable<String> getUserById(int id);
-
     Observable<List<SearchUser>> getSearchUserList(@NonNull String forQuery);
 
     Observable<List<UserPost>> getUserPosts(long id);

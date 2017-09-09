@@ -5,6 +5,8 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
+//TODO проанализировать все DTO и вывести общие части, вынести их.
+
 public class UserRecentMedia {
 
     @SerializedName("pagination")
@@ -44,10 +46,10 @@ public class UserRecentMedia {
     public static class User {
         @SerializedName("id")
         private String id;
-        @SerializedName("full_name")
-        private String full_name;
-        @SerializedName("profile_picture")
-        private String profile_picture;
+        @SerializedName("fullName")
+        private String fullName;
+        @SerializedName("profilePicture")
+        private String profilePicture;
         @SerializedName("username")
         private String username;
 
@@ -59,20 +61,20 @@ public class UserRecentMedia {
             this.id = id;
         }
 
-        public String getFull_name() {
-            return full_name;
+        public String getFullName() {
+            return fullName;
         }
 
-        public void setFull_name(String full_name) {
-            this.full_name = full_name;
+        public void setFullName(String fullName) {
+            this.fullName = fullName;
         }
 
-        public String getProfile_picture() {
-            return profile_picture;
+        public String getProfilePicture() {
+            return profilePicture;
         }
 
-        public void setProfile_picture(String profile_picture) {
-            this.profile_picture = profile_picture;
+        public void setProfilePicture(String profilePicture) {
+            this.profilePicture = profilePicture;
         }
 
         public String getUsername() {
@@ -117,7 +119,7 @@ public class UserRecentMedia {
         }
     }
 
-    public static class Low_resolution {
+    public static class LowResolution {
         @SerializedName("width")
         private int width;
         @SerializedName("height")
@@ -150,7 +152,7 @@ public class UserRecentMedia {
         }
     }
 
-    public static class Standard_resolution {
+    public static class StandarResolution {
         @SerializedName("width")
         private int width;
         @SerializedName("height")
@@ -186,10 +188,10 @@ public class UserRecentMedia {
     public static class Images {
         @SerializedName("thumbnail")
         private Thumbnail thumbnail;
-        @SerializedName("low_resolution")
-        private Low_resolution low_resolution;
-        @SerializedName("standard_resolution")
-        private Standard_resolution standard_resolution;
+        @SerializedName("lowResolution")
+        private LowResolution lowResolution;
+        @SerializedName("standardResolution")
+        private StandarResolution standardResolution;
 
         public Thumbnail getThumbnail() {
             return thumbnail;
@@ -199,20 +201,20 @@ public class UserRecentMedia {
             this.thumbnail = thumbnail;
         }
 
-        public Low_resolution getLow_resolution() {
-            return low_resolution;
+        public LowResolution getLowResolution() {
+            return lowResolution;
         }
 
-        public void setLow_resolution(Low_resolution low_resolution) {
-            this.low_resolution = low_resolution;
+        public void setLowResolution(LowResolution lowResolution) {
+            this.lowResolution = lowResolution;
         }
 
-        public Standard_resolution getStandard_resolution() {
-            return standard_resolution;
+        public StandarResolution getStandardResolution() {
+            return standardResolution;
         }
 
-        public void setStandard_resolution(Standard_resolution standard_resolution) {
-            this.standard_resolution = standard_resolution;
+        public void setStandardResolution(StandarResolution standardResolution) {
+            this.standardResolution = standardResolution;
         }
     }
 
@@ -252,12 +254,12 @@ public class UserRecentMedia {
         private User user;
         @SerializedName("images")
         private Images images;
-        @SerializedName("created_time")
-        private String created_time;
+        @SerializedName("createdTime")
+        private String createdTime;
         @SerializedName("caption")
         private String caption;
-        @SerializedName("user_has_liked")
-        private boolean user_has_liked;
+        @SerializedName("userHasLiked")
+        private boolean userHasLiked;
         @SerializedName("likes")
         private Likes likes;
         @SerializedName("tags")
@@ -274,8 +276,8 @@ public class UserRecentMedia {
         private String location;
         @SerializedName("attribution")
         private String attribution;
-        @SerializedName("users_in_photo")
-        private List<Users_in_photo> users_in_photo;
+        @SerializedName("usersInPhotos")
+        private List<Users_in_photo> usersInPhotos;
 
         public String getId() {
             return id;
@@ -301,12 +303,12 @@ public class UserRecentMedia {
             this.images = images;
         }
 
-        public String getCreated_time() {
-            return created_time;
+        public String getCreatedTime() {
+            return createdTime;
         }
 
-        public void setCreated_time(String created_time) {
-            this.created_time = created_time;
+        public void setCreatedTime(String createdTime) {
+            this.createdTime = createdTime;
         }
 
         public String getCaption() {
@@ -317,12 +319,12 @@ public class UserRecentMedia {
             this.caption = caption;
         }
 
-        public boolean getUser_has_liked() {
-            return user_has_liked;
+        public boolean getUserHasLiked() {
+            return userHasLiked;
         }
 
-        public void setUser_has_liked(boolean user_has_liked) {
-            this.user_has_liked = user_has_liked;
+        public void setUserHasLiked(boolean userHasLiked) {
+            this.userHasLiked = userHasLiked;
         }
 
         public Likes getLikes() {
@@ -389,12 +391,12 @@ public class UserRecentMedia {
             this.attribution = attribution;
         }
 
-        public List<Users_in_photo> getUsers_in_photo() {
-            return users_in_photo;
+        public List<Users_in_photo> getUsersInPhotos() {
+            return usersInPhotos;
         }
 
-        public void setUsers_in_photo(List<Users_in_photo> users_in_photo) {
-            this.users_in_photo = users_in_photo;
+        public void setUsersInPhotos(List<Users_in_photo> usersInPhotos) {
+            this.usersInPhotos = usersInPhotos;
         }
     }
 

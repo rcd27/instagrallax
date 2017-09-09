@@ -12,7 +12,6 @@ import org.junit.Test;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import io.reactivex.schedulers.Schedulers;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -24,12 +23,10 @@ import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
 
 public class ApiTest {
-    private static final String ACCESS_TOKEN = "5968608397.efb6703.e766cc20812c4842ab903edded1148c9";
     private static final String SELF_FULL_NAME = "Станислав Земляков";
 
     private InstagramApi api;
     private final long[] idContainer = new long[1];
-    private long userId;
 
     @Before
     public void prepareApi() {
@@ -56,23 +53,21 @@ public class ApiTest {
 
     @Test
     public void search_test() {
-        api.searchUser("Ста", ACCESS_TOKEN)
+        api.searchUser("Ста")
                 .subscribe(userData ->
-                        assertEquals(SELF_FULL_NAME, userData.getData().get(0).getFull_name()));
+                        assertEquals(SELF_FULL_NAME, userData.getData().get(0).getFullName()));
     }
 
     @Test
     public void id_test() {
-        api.searchUser(SELF_FULL_NAME, ACCESS_TOKEN)
+        api.searchUser(SELF_FULL_NAME)
                 .subscribe(userData -> idContainer[0] = userData.getData().get(0).getId());
         Assert.assertNotNull(idContainer[0]);
-        userId = idContainer[0];
     }
 
     @Test
     public void recent_media_test() {
-        // Видимо, тесты идут в разных потоках и в переменную userId ничего не записалось в idTest()
-        api.getRecentMediaForUser(5968608397L, ACCESS_TOKEN)
+        api.getRecentMediaForUser(5968608397L)
                 .subscribe(userRecentMedia -> {
                     List<UserRecentMedia.Data> userRecentMediaData = userRecentMedia.getData();
                     assertNotNull(userRecentMediaData);

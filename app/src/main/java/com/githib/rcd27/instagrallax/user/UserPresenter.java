@@ -29,11 +29,6 @@ public class UserPresenter implements UserContract.Presenter {
     }
 
     @Override
-    public Observable<List<UserPost>> getUserPosts() {
-        return model.getUserPosts(currentUserId);
-    }
-
-    @Override
     public void procedeUserName() {
         model.getUserNameById(currentUserId)
                 .subscribe(view::setTitleForCurrentUser);

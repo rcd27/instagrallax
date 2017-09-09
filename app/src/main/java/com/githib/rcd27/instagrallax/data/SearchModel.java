@@ -22,11 +22,6 @@ public class SearchModel implements Model {
     }
 
     @Override
-    public Observable<String> getUserById(int id) {
-        return null;
-    }
-
-    @Override
     public Observable<List<SearchUser>> getSearchUserList(@NonNull String forQuery) {
         return userRepository.getSearchUserList(forQuery);
     }

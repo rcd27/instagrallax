@@ -6,8 +6,6 @@ import android.widget.ImageView;
 
 import java.util.List;
 
-import io.reactivex.Observable;
-
 public interface UserContract {
 
     interface View {
@@ -24,8 +22,6 @@ public interface UserContract {
     interface Presenter {
 
         void setCurrentUserId(long id);
-
-        Observable<List<UserPost>> getUserPosts();
 
         void procedeUserName();
 

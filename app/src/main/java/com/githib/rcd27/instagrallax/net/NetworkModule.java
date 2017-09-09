@@ -1,19 +1,20 @@
 package com.githib.rcd27.instagrallax.net;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 
 import com.jakewharton.picasso.OkHttp3Downloader;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
-
-import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
 import okhttp3.Cache;
 import okhttp3.CacheControl;
+import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -44,9 +45,9 @@ public class NetworkModule {
         OkHttpClient httpClient = new OkHttpClient.Builder()
                 .connectTimeout(CONNECT_TIMEOUT, TimeUnit.SECONDS)
                 .addInterceptor(provideLoggingInterceptor())
-                .addInterceptor(provideAuthInterceptor())
                 .addInterceptor(provideOfflineCacheInterceptor())
                 .addNetworkInterceptor(provideCacheInterceptor())
+                .addInterceptor(new AccessTokenInterceptor())
                 .cache(getCache(context))
                 .build();
 
@@ -58,16 +59,6 @@ public class NetworkModule {
 
         return builder.build()
                 .create(InstagramApi.class);
-    }
-
-    private Interceptor provideAuthInterceptor() {
-        return chain -> {
-            Request original = chain.request();
-            Request.Builder requestBuilder = original.newBuilder()
-                    .header(ACCESS_TOKEN, accessToken);
-            Request request = requestBuilder.build();
-            return chain.proceed(request);
-        };
     }
 
     private Interceptor provideOfflineCacheInterceptor() {
@@ -121,5 +112,23 @@ public class NetworkModule {
         picasso.setLoggingEnabled(true);
 
         return picasso;
+    }
+
+    private class AccessTokenInterceptor implements Interceptor {
+        @Override
+        public Response intercept(@NonNull Chain chain) throws IOException {
+            Request original = chain.request();
+            HttpUrl originalHttpUrl = original.url();
+
+            HttpUrl resultUrl = originalHttpUrl.newBuilder()
+                    .addQueryParameter(ACCESS_TOKEN, accessToken)
+                    .build();
+
+            Request.Builder requestBuilder = original.newBuilder()
+                    .url(resultUrl);
+
+            Request request = requestBuilder.build();
+            return chain.proceed(request);
+        }
     }
 }

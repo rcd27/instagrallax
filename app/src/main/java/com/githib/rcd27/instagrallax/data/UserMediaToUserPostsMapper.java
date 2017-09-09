@@ -28,13 +28,13 @@ public class UserMediaToUserPostsMapper implements Function<UserRecentMedia, Lis
             int thumbnailHeight = dtoImages.getThumbnail().getHeight();
             String thumbnailUrl = dtoImages.getThumbnail().getUrl();
 
-            int lowResolutionWidth = dtoImages.getLow_resolution().getWidth();
-            int lowResolutionHeight = dtoImages.getLow_resolution().getHeight();
-            String lowResolutionUrl = dtoImages.getLow_resolution().getUrl();
+            int lowResolutionWidth = dtoImages.getLowResolution().getWidth();
+            int lowResolutionHeight = dtoImages.getLowResolution().getHeight();
+            String lowResolutionUrl = dtoImages.getLowResolution().getUrl();
 
-            int standartResolutionWidth = dtoImages.getStandard_resolution().getWidth();
-            int standartResolutionHeight = dtoImages.getStandard_resolution().getHeight();
-            String standartResolutionUrl = dtoImages.getStandard_resolution().getUrl();
+            int standartResolutionWidth = dtoImages.getStandardResolution().getWidth();
+            int standartResolutionHeight = dtoImages.getStandardResolution().getHeight();
+            String standartResolutionUrl = dtoImages.getStandardResolution().getUrl();
 
             List<PostImage> postImages = new ArrayList<>();
             postImages.add(new PostImage(THUMBNAIL, thumbnialWidth, thumbnailHeight, thumbnailUrl));

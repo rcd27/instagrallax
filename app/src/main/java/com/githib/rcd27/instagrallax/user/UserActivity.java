@@ -40,6 +40,9 @@ public class UserActivity extends AppCompatActivity implements UserContract.View
     public UserContract.Presenter presenter;
     private long currentUserId;
 
+    @Inject
+    public Picasso picasso;
+
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
@@ -60,11 +63,6 @@ public class UserActivity extends AppCompatActivity implements UserContract.View
 
     @Override
     public void setAdapterForRecyclerView(List<UserPost> posts) {
-        // TODO убрать в DI
-        Picasso picasso = new Picasso.Builder(getApplicationContext())
-                .downloader(new OkHttp3Downloader(getApplicationContext(), 10 * 1024 * 1024))
-                .build();
-
         UserPostsAdapter userPostsAdapter = new UserPostsAdapter(picasso, presenter, posts);
         recyclerView.setAdapter(userPostsAdapter);
     }
