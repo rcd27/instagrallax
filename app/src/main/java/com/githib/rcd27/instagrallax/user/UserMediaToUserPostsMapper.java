@@ -1,4 +1,4 @@
-package com.githib.rcd27.instagrallax.data;
+package com.githib.rcd27.instagrallax.user;
 
 
 import com.githib.rcd27.instagrallax.net.UserRecentMedia;

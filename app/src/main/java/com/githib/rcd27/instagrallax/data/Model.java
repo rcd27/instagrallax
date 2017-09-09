@@ -3,6 +3,7 @@ package com.githib.rcd27.instagrallax.data;
 
 import android.support.annotation.NonNull;
 
+import com.githib.rcd27.instagrallax.post.PostComment;
 import com.githib.rcd27.instagrallax.search.SearchUser;
 import com.githib.rcd27.instagrallax.user.UserPost;
 
@@ -17,5 +18,7 @@ public interface Model {
     Observable<List<UserPost>> getUserPosts(long id);
 
     Observable<String> getUserNameById(long id);
+
+    Observable<List<PostComment>> getPostComments(@NonNull String postId);
 
 }

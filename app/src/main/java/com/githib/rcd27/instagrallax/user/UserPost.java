@@ -1,7 +1,6 @@
 package com.githib.rcd27.instagrallax.user;
 
 import com.githib.rcd27.instagrallax.VisualObject;
-import com.githib.rcd27.instagrallax.data.UserMediaToUserPostsMapper;
 
 import java.util.List;
 

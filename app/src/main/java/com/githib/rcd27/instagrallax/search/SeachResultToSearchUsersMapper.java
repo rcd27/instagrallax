@@ -9,7 +9,7 @@ import java.util.List;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Function;
 
-public class SearchUserMapper
+public class SeachResultToSearchUsersMapper
         implements Function<SearchResult, List<SearchUser>> {
 
     @Override

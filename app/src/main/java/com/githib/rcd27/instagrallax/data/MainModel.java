@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 
 import com.githib.rcd27.instagrallax.data.Model;
 import com.githib.rcd27.instagrallax.data.UserRepository;
+import com.githib.rcd27.instagrallax.post.PostComment;
 import com.githib.rcd27.instagrallax.search.SearchUser;
 import com.githib.rcd27.instagrallax.user.UserPost;
 
@@ -13,12 +14,14 @@ import java.util.List;
 import io.reactivex.Observable;
 
 
-public class SearchModel implements Model {
+public class MainModel implements Model {
 
     private final UserRepository userRepository;
+    private final PostRepository postRepository;
 
-    public SearchModel(UserRepository userRepository) {
+    public MainModel(UserRepository userRepository, PostRepository postRepository) {
         this.userRepository = userRepository;
+        this.postRepository = postRepository;
     }
 
     @Override
@@ -34,5 +37,10 @@ public class SearchModel implements Model {
     @Override
     public Observable<String> getUserNameById(long id) {
         return userRepository.getUserNameById(id);
+    }
+
+    @Override
+    public Observable<List<PostComment>> getPostComments(@NonNull String postId) {
+        return postRepository.getCommentsForPost(postId);
     }
 }
