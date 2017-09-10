@@ -8,7 +8,7 @@
     <ImageView
         android:id="@+id/activity_post_image_view"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="wrap_content"
         android:contentDescription="@string/image_view_description"
         android:scaleType="centerCrop"
         android:transitionName="sharedImageView" />

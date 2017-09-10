@@ -1,7 +1,6 @@
 package com.githib.rcd27.instagrallax.user;
 
 
-import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.widget.ImageView;
 
@@ -18,7 +17,7 @@ public class UserPresenter implements UserContract.Presenter {
         this.currentUserId = id;
     }
 
-    public UserPresenter(@NonNull UserContract.View view,@NonNull Model model) {
+    public UserPresenter(@NonNull UserContract.View view, @NonNull Model model) {
         this.view = view;
         this.model = model;
     }
@@ -37,9 +36,8 @@ public class UserPresenter implements UserContract.Presenter {
 
     @Override
     public void onPostClicked(@NonNull String postId,
-                              // FIXME переделать на ResId
-                              @IdRes int imageViewId,
+                              @NonNull ImageView imageView,
                               @NonNull String imageUrl) {
-        view.startPostActivity(postId, imageViewId, imageUrl);
+        view.startPostActivity(postId, imageView, imageUrl);
     }
 }
