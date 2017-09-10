@@ -2,8 +2,6 @@ package com.githib.rcd27.instagrallax.user;
 
 
 import com.githib.rcd27.instagrallax.net.UserRecentMediaDTO;
-import com.githib.rcd27.instagrallax.user.PostImage;
-import com.githib.rcd27.instagrallax.user.UserPost;
 
 import java.util.ArrayList;
 import java.util.List;

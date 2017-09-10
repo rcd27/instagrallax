@@ -3,8 +3,6 @@ package com.githib.rcd27.instagrallax.data;
 
 import android.support.annotation.NonNull;
 
-import com.githib.rcd27.instagrallax.data.Model;
-import com.githib.rcd27.instagrallax.data.UserRepository;
 import com.githib.rcd27.instagrallax.post.PostComment;
 import com.githib.rcd27.instagrallax.search.SearchUser;
 import com.githib.rcd27.instagrallax.user.UserPost;

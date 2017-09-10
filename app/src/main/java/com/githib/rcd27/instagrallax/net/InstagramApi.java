@@ -1,12 +1,6 @@
 package com.githib.rcd27.instagrallax.net;
 
 
-import android.media.MediaDataSource;
-
-import org.w3c.dom.Comment;
-
-import java.util.List;
-
 import io.reactivex.Observable;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
@@ -24,5 +18,5 @@ public interface InstagramApi {
     Observable<UserDataByIdDTO> getUserDataById(@Path("user-id") long userId);
 
     @GET("v1/media/{media-id}/comments/")
-    Observable<List<MediaDataDTO>> getCommentsForPost(@Path("media-id") String postId);
+    Observable<MediaDataDTO> getCommentsForPost(@Path("media-id") String postId);
 }

@@ -59,11 +59,6 @@ public class PostActivity extends AppCompatActivity implements PostContract.View
                     }
                 });
 
-//        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
-//                android.R.layout.simple_list_item_1, PostRepository.getInstance().getComments());
-//        listView.setAdapter(adapter);
-
-
         String currentPostID = getIntent().getExtras().getString(POST_ID);
         presenter.procedeComments(currentPostID);
         setTitle("id#" + currentPostID);

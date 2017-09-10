@@ -6,12 +6,6 @@ import android.widget.ImageView;
 
 import com.githib.rcd27.instagrallax.data.Model;
 
-import java.util.List;
-
-import io.reactivex.Observable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
-
 public class UserPresenter implements UserContract.Presenter {
 
     private final UserContract.View view;

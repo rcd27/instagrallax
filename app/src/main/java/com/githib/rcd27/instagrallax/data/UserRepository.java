@@ -4,8 +4,8 @@ package com.githib.rcd27.instagrallax.data;
 import android.support.annotation.NonNull;
 
 import com.githib.rcd27.instagrallax.net.InstagramApi;
+import com.githib.rcd27.instagrallax.search.SearchResultToSearchUsersMapper;
 import com.githib.rcd27.instagrallax.search.SearchUser;
-import com.githib.rcd27.instagrallax.search.SeachResultToSearchUsersMapper;
 import com.githib.rcd27.instagrallax.user.UserMediaToUserPostsMapper;
 import com.githib.rcd27.instagrallax.user.UserPost;
 
@@ -32,7 +32,7 @@ public class UserRepository {
     @NonNull
     Observable<List<SearchUser>> getSearchUserList(@NonNull String forQuery) {
         return api.searchUser(forQuery)
-                .map(new SeachResultToSearchUsersMapper())
+                .map(new SearchResultToSearchUsersMapper())
                 .compose(schedulersTransformer);
     }
 

@@ -18,6 +18,6 @@ public class PostModule {
 
     @Provides
     PostContract.Presenter providePostPresenter(Model model) {
-        return new PostPresenter(view,model);
+        return new PostPresenter(view, model);
     }
 }

@@ -9,4 +9,5 @@ import dagger.Subcomponent;
 public interface PostComponent {
 
     void inject(PostActivity postActivity);
+
 }

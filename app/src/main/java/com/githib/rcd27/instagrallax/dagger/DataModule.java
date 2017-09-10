@@ -3,7 +3,7 @@ package com.githib.rcd27.instagrallax.dagger;
 
 import com.githib.rcd27.instagrallax.data.MainModel;
 import com.githib.rcd27.instagrallax.data.Model;
-import com.githib.rcd27.instagrallax.data.SearchModel;
+import com.githib.rcd27.instagrallax.data.PostRepository;
 import com.githib.rcd27.instagrallax.data.UserRepository;
 import com.githib.rcd27.instagrallax.net.InstagramApi;
 
@@ -17,8 +17,8 @@ public class DataModule {
 
     @Provides
     @Singleton
-    Model provideModel(UserRepository userRepository) {
-        return new SearchModel(userRepository);
+    Model provideModel(UserRepository userRepository, PostRepository postRepository) {
+        return new MainModel(userRepository, postRepository);
     }
 
     @Provides
