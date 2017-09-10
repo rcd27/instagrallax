@@ -2,13 +2,13 @@ package com.githib.rcd27.instagrallax.user;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.githib.rcd27.instagrallax.MagnettoApp;
@@ -73,12 +73,12 @@ public class UserActivity extends AppCompatActivity implements UserContract.View
     }
 
     @Override
-    public void startPostActivity(String postId, @NonNull ImageView imageView, @NonNull String imageUrl) {
+    public void startPostActivity(String postId, @IdRes int imageViewId, @NonNull String imageUrl) {
         Intent intent = new Intent(getApplicationContext(), PostActivity.class);
         intent.putExtra(POST_ID, postId);
         intent.putExtra(IMAGE_URL, imageUrl);
         ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(
-                this, imageView, "sharedImageView"
+                this, findViewById(imageViewId), "sharedImageView"
         );
         startActivity(intent, options.toBundle());
     }

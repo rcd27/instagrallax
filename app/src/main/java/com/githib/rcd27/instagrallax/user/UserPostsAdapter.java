@@ -62,7 +62,7 @@ class UserPostsAdapter extends RecyclerView.Adapter<UserPostsAdapter.ViewHolder>
             super(itemView);
             imageView = (ImageView) itemView.findViewById(R.id.activity_user_recycler_view_cell_image_view);
             imageView.setOnClickListener(imageView ->
-                    presenter.onPostClicked(postId, this.imageView, this.standartResolutionUrl));
+                    presenter.onPostClicked(postId, imageView.getId(), this.standartResolutionUrl));
         }
     }
 }

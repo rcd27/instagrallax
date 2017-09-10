@@ -31,6 +31,8 @@ public class PostActivity extends AppCompatActivity implements PostContract.View
 
     @Inject
     public PostContract.Presenter presenter;
+    @Inject
+    public Picasso picasso;
 
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,10 +45,7 @@ public class PostActivity extends AppCompatActivity implements PostContract.View
 
         // see: http://www.androiddesignpatterns.com/2015/03/activity-postponed-shared-element-transitions-part3b.html
         postponeEnterTransition(); // temporarily prevent shared element transition.
-        // picasso.tag
-        // TODO взять picasso из DI
-        Picasso.with(this)
-                .load(getIntent().getExtras().getString(IMAGE_URL))
+        picasso.load(getIntent().getExtras().getString(IMAGE_URL))
                 .into(imageView, new Callback() {
                     @Override
                     public void onSuccess() {
@@ -79,7 +78,7 @@ public class PostActivity extends AppCompatActivity implements PostContract.View
 
     @Override
     public void onBackPressed() {
-        // picasso.cancel
+        picasso.cancelRequest(imageView);
         finishAfterTransition();
         super.onBackPressed();
     }

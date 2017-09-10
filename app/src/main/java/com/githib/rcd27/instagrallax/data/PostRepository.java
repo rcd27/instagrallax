@@ -27,7 +27,6 @@ public class PostRepository {
 
     public Observable<List<PostComment>> getCommentsForPost(String postId) {
         return api.getCommentsForPost(postId)
-                // TODO сделать анонимным вложенным классом. Все мапперы
                 .map(new MediaDataToPostCommentsMapper())
                 .compose(schedulersTransformer);
     }

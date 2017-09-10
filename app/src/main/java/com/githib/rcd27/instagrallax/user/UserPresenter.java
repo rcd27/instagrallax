@@ -1,6 +1,7 @@
 package com.githib.rcd27.instagrallax.user;
 
 
+import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.widget.ImageView;
 
@@ -37,8 +38,8 @@ public class UserPresenter implements UserContract.Presenter {
     @Override
     public void onPostClicked(@NonNull String postId,
                               // FIXME переделать на ResId
-                              @NonNull ImageView clicked,
+                              @IdRes int imageViewId,
                               @NonNull String imageUrl) {
-        view.startPostActivity(postId, clicked, imageUrl);
+        view.startPostActivity(postId, imageViewId, imageUrl);
     }
 }
