@@ -2,7 +2,7 @@ package com.githib.rcd27.instagrallax;
 
 
 import com.githib.rcd27.instagrallax.net.InstagramApi;
-import com.githib.rcd27.instagrallax.net.UserRecentMedia;
+import com.githib.rcd27.instagrallax.net.UserRecentMediaDTO;
 
 import junit.framework.Assert;
 
@@ -55,7 +55,7 @@ public class ApiTest {
     public void search_test() {
         api.searchUser("Ста")
                 .subscribe(userData ->
-                        assertEquals(SELF_FULL_NAME, userData.getData().get(0).getFullName()));
+                        assertEquals(SELF_FULL_NAME, userData.getData().get(0).getFull_name()));
     }
 
     @Test
@@ -68,8 +68,8 @@ public class ApiTest {
     @Test
     public void recent_media_test() {
         api.getRecentMediaForUser(5968608397L)
-                .subscribe(userRecentMedia -> {
-                    List<UserRecentMedia.Data> userRecentMediaData = userRecentMedia.getData();
+                .subscribe(userRecentMediaDTO -> {
+                    List<UserRecentMediaDTO.Data> userRecentMediaData = userRecentMediaDTO.getData();
                     assertNotNull(userRecentMediaData);
                     System.out.println(userRecentMediaData.get(0).getId());
                 });

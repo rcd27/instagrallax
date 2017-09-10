@@ -15,16 +15,11 @@ import com.githib.rcd27.instagrallax.MagnettoApp;
 import com.githib.rcd27.instagrallax.R;
 import com.githib.rcd27.instagrallax.dagger.UserModule;
 import com.githib.rcd27.instagrallax.post.PostActivity;
-import com.jakewharton.picasso.OkHttp3Downloader;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
-
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
 
 import static com.githib.rcd27.instagrallax.post.PostActivity.IMAGE_URL;
 import static com.githib.rcd27.instagrallax.post.PostActivity.POST_ID;
@@ -57,8 +52,8 @@ public class UserActivity extends AppCompatActivity implements UserContract.View
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
         recyclerView.setLayoutManager(gridLayoutManager);
 
-        presenter.procedeUserName();
-        presenter.procedePosts();
+        presenter.proceedUserName();
+        presenter.proceedPosts();
     }
 
     @Override

@@ -17,7 +17,7 @@ public class SearchPresenter implements SearchContract.Presenter {
     }
 
     @Override
-    public void procedeUserSearch(@NonNull String query) {
+    public void proceedUserSearch(@NonNull String query) {
         model.getSearchUserList(query)
                 .subscribe(view::showSuggestions);
     }

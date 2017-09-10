@@ -23,25 +23,28 @@ public class UserPresenter implements UserContract.Presenter {
         this.currentUserId = id;
     }
 
-    public UserPresenter(UserContract.View view, Model model) {
+    public UserPresenter(@NonNull UserContract.View view,@NonNull Model model) {
         this.view = view;
         this.model = model;
     }
 
     @Override
-    public void procedeUserName() {
+    public void proceedUserName() {
         model.getUserNameById(currentUserId)
                 .subscribe(view::setTitleForCurrentUser);
     }
 
     @Override
-    public void procedePosts() {
+    public void proceedPosts() {
         model.getUserPosts(currentUserId)
                 .subscribe(view::setAdapterForRecyclerView);
     }
 
     @Override
-    public void onPostClicked(String postId, @NonNull ImageView clicked, @NonNull String imageUrl) {
+    public void onPostClicked(@NonNull String postId,
+                              // FIXME переделать на ResId
+                              @NonNull ImageView clicked,
+                              @NonNull String imageUrl) {
         view.startPostActivity(postId, clicked, imageUrl);
     }
 }

@@ -21,16 +21,19 @@ public class SearchModel implements Model {
         this.userRepository = userRepository;
     }
 
+    @NonNull
     @Override
     public Observable<List<SearchUser>> getSearchUserList(@NonNull String forQuery) {
         return userRepository.getSearchUserList(forQuery);
     }
 
+    @NonNull
     @Override
     public Observable<List<UserPost>> getUserPosts(long id) {
         return userRepository.getUserPosts(id);
     }
 
+    @NonNull
     @Override
     public Observable<String> getUserNameById(long id) {
         return userRepository.getUserNameById(id);

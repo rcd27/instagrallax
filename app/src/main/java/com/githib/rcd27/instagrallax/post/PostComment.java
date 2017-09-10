@@ -1,8 +1,5 @@
 package com.githib.rcd27.instagrallax.post;
 
-import com.githib.rcd27.instagrallax.VisualObject;
-
-@VisualObject
 public class PostComment {
     public final long commentId;
     public final String commentText;

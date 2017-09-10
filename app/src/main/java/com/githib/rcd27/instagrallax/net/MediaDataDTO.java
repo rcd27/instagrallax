@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class MediaData {
+public class MediaDataDTO {
 
     @SerializedName("data")
     private List<Data> data;

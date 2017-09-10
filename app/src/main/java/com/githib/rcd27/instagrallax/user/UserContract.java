@@ -23,10 +23,10 @@ public interface UserContract {
 
         void setCurrentUserId(long id);
 
-        void procedeUserName();
+        void proceedUserName();
 
         void onPostClicked(String postId, @NonNull ImageView view, @NonNull String imageUrl);
 
-        void procedePosts();
+        void proceedPosts();
     }
 }

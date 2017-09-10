@@ -10,6 +10,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
+import javax.inject.Singleton;
+
 import dagger.Module;
 import dagger.Provides;
 import okhttp3.Cache;
@@ -41,6 +43,7 @@ public class NetworkModule {
     }
 
     @Provides
+    @Singleton
     public InstagramApi provideApiInterface(Context context) {
         OkHttpClient httpClient = new OkHttpClient.Builder()
                 .connectTimeout(CONNECT_TIMEOUT, TimeUnit.SECONDS)
@@ -103,6 +106,7 @@ public class NetworkModule {
     }
 
     @Provides
+    @Singleton
     public Picasso providePicasso(Context context) {
         Picasso picasso = new Picasso.Builder(context)
                 .downloader(new OkHttp3Downloader(context, CACHE_SIZE * 2))

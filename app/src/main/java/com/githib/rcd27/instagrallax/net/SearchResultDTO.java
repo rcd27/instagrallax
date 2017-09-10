@@ -3,18 +3,20 @@ package com.githib.rcd27.instagrallax.net;
 
 import com.google.gson.annotations.SerializedName;
 
-public class UserDataByID {
+import java.util.List;
+
+public class SearchResultDTO {
 
     @SerializedName("data")
-    private Data data;
+    private List<Data> data;
     @SerializedName("meta")
     private Meta meta;
 
-    public Data getData() {
+    public List<Data> getData() {
         return data;
     }
 
-    public void setData(Data data) {
+    public void setData(List<Data> data) {
         this.data = data;
     }
 
@@ -26,42 +28,9 @@ public class UserDataByID {
         this.meta = meta;
     }
 
-    public static class Counts {
-        @SerializedName("media")
-        private int media;
-        @SerializedName("follows")
-        private int follows;
-        @SerializedName("followed_by")
-        private int followed_by;
-
-        public int getMedia() {
-            return media;
-        }
-
-        public void setMedia(int media) {
-            this.media = media;
-        }
-
-        public int getFollows() {
-            return follows;
-        }
-
-        public void setFollows(int follows) {
-            this.follows = follows;
-        }
-
-        public int getFollowed_by() {
-            return followed_by;
-        }
-
-        public void setFollowed_by(int followed_by) {
-            this.followed_by = followed_by;
-        }
-    }
-
     public static class Data {
         @SerializedName("id")
-        private String id;
+        private long id;
         @SerializedName("username")
         private String username;
         @SerializedName("profile_picture")
@@ -74,14 +43,12 @@ public class UserDataByID {
         private String website;
         @SerializedName("is_business")
         private boolean is_business;
-        @SerializedName("counts")
-        private Counts counts;
 
-        public String getId() {
+        public long getId() {
             return id;
         }
 
-        public void setId(String id) {
+        public void setId(long id) {
             this.id = id;
         }
 
@@ -132,14 +99,6 @@ public class UserDataByID {
         public void setIs_business(boolean is_business) {
             this.is_business = is_business;
         }
-
-        public Counts getCounts() {
-            return counts;
-        }
-
-        public void setCounts(Counts counts) {
-            this.counts = counts;
-        }
     }
 
     public static class Meta {
@@ -155,4 +114,3 @@ public class UserDataByID {
         }
     }
 }
-

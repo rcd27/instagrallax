@@ -2,9 +2,6 @@ package com.githib.rcd27.instagrallax.search;
 
 import android.support.annotation.NonNull;
 
-import com.githib.rcd27.instagrallax.VisualObject;
-
-@VisualObject
 public class SearchUser {
     private final long id;
     private final String fullName;
@@ -21,18 +18,22 @@ public class SearchUser {
         this.userProfilePicture = userProfilePicture;
     }
 
+    @NonNull
     public long getId() {
         return id;
     }
 
+    @NonNull
     public String getFullName() {
         return fullName;
     }
 
+    @NonNull
     public String getLogin() {
         return login;
     }
 
+    @NonNull
     public String getUserProfilePicture() {
         return userProfilePicture;
     }

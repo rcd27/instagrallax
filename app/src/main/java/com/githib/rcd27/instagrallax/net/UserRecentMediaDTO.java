@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class UserRecentMedia {
+public class UserRecentMediaDTO {
 
     @SerializedName("pagination")
     private Pagination pagination;

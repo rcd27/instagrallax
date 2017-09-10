@@ -20,7 +20,7 @@ public interface SearchContract {
 
     interface Presenter {
 
-        void procedeUserSearch(@NonNull String query);
+        void proceedUserSearch(@NonNull String query);
 
     }
 }

@@ -28,18 +28,21 @@ public class UserRepository {
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
+    @NonNull
     Observable<List<SearchUser>> getSearchUserList(@NonNull String forQuery) {
         return api.searchUser(forQuery)
                 .map(new SearchUserMapper())
                 .compose(schedulersTransformer);
     }
 
+    @NonNull
     Observable<List<UserPost>> getUserPosts(long userId) {
         return api.getRecentMediaForUser(userId)
                 .map(new UserMediaToUserPostsMapper())
                 .compose(schedulersTransformer);
     }
 
+    @NonNull
     Observable<String> getUserNameById(long id) {
         return api.getUserDataById(id)
                 .map(userDataByID -> userDataByID.getData().getFull_name())

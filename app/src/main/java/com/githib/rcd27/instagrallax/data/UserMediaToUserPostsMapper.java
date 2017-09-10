@@ -1,7 +1,7 @@
 package com.githib.rcd27.instagrallax.data;
 
 
-import com.githib.rcd27.instagrallax.net.UserRecentMedia;
+import com.githib.rcd27.instagrallax.net.UserRecentMediaDTO;
 import com.githib.rcd27.instagrallax.user.PostImage;
 import com.githib.rcd27.instagrallax.user.UserPost;
 
@@ -11,19 +11,19 @@ import java.util.List;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Function;
 
-public class UserMediaToUserPostsMapper implements Function<UserRecentMedia, List<UserPost>> {
+public class UserMediaToUserPostsMapper implements Function<UserRecentMediaDTO, List<UserPost>> {
     public static final String THUMBNAIL = "thumbnail";
     public static final String LOW_RESOLUTION = "lowResolution";
     public static final String STANDERT_RESOLUTION = "standartResolution";
 
     @Override
-    public List<UserPost> apply(@NonNull UserRecentMedia userRecentMedia) throws Exception {
+    public List<UserPost> apply(@NonNull UserRecentMediaDTO userRecentMediaDTO) throws Exception {
         List<UserPost> result = new ArrayList<>();
-        List<UserRecentMedia.Data> dto = userRecentMedia.getData();
-        for (UserRecentMedia.Data currentData : dto) {
+        List<UserRecentMediaDTO.Data> dto = userRecentMediaDTO.getData();
+        for (UserRecentMediaDTO.Data currentData : dto) {
             String currentDataId = currentData.getId();
 
-            UserRecentMedia.Images dtoImages = currentData.getImages();
+            UserRecentMediaDTO.Images dtoImages = currentData.getImages();
             int thumbnialWidth = dtoImages.getThumbnail().getWidth();
             int thumbnailHeight = dtoImages.getThumbnail().getHeight();
             String thumbnailUrl = dtoImages.getThumbnail().getUrl();

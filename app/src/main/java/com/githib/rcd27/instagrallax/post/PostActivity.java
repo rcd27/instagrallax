@@ -33,6 +33,7 @@ public class PostActivity extends AppCompatActivity {
 
         // see: http://www.androiddesignpatterns.com/2015/03/activity-postponed-shared-element-transitions-part3b.html
         postponeEnterTransition(); // temporarily prevent shared element transition.
+        // picasso.tag
         Picasso.with(this)
                 .load(getIntent().getExtras().getString(IMAGE_URL))
                 .into(imageView, new Callback() {
@@ -57,6 +58,7 @@ public class PostActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        // picasso.cancel
         finishAfterTransition();
         super.onBackPressed();
     }

@@ -131,7 +131,7 @@ public class SearchActivity extends AppCompatActivity implements SearchContract.
         @Override
         public boolean onQueryTextChange(String newText) {
             if (!newText.isEmpty()) {
-                presenter.procedeUserSearch(newText);
+                presenter.proceedUserSearch(newText);
             }
             return false;
         }
