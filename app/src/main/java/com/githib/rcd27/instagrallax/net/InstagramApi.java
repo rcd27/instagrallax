@@ -24,5 +24,5 @@ public interface InstagramApi {
     Observable<UserDataByID> getUserDataById(@Path("user-id") long userId);
 
     @GET("v1/media/{media-id}/comments/")
-    Observable<List<MediaData>> getCommentsForPost(@Path("media-id") String postId);
+    Observable<MediaData> getCommentsForPost(@Path("media-id") String postId);
 }
