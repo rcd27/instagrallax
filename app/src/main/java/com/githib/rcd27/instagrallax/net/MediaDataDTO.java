@@ -30,7 +30,7 @@ public class MediaDataDTO {
 
     public static class From {
         @SerializedName("id")
-        private long id;
+        private String id;
         @SerializedName("username")
         private String username;
         @SerializedName("full_name")
@@ -38,11 +38,11 @@ public class MediaDataDTO {
         @SerializedName("profile_picture")
         private String profilePicture;
 
-        public long getId() {
+        public String getId() {
             return id;
         }
 
-        public void setId(long id) {
+        public void setId(String id) {
             this.id = id;
         }
 
@@ -73,19 +73,19 @@ public class MediaDataDTO {
 
     public static class Data {
         @SerializedName("id")
-        private long id;
+        private String id;
         @SerializedName("from")
         private From from;
         @SerializedName("text")
         private String text;
         @SerializedName("created_time")
-        private long createdTime;
+        private String createdTime;
 
-        public long getId() {
+        public String getId() {
             return id;
         }
 
-        public void setId(long id) {
+        public void setId(String id) {
             this.id = id;
         }
 
@@ -105,11 +105,11 @@ public class MediaDataDTO {
             this.text = text;
         }
 
-        public long getCreatedTime() {
+        public String getCreatedTime() {
             return createdTime;
         }
 
-        public void setCreatedTime(long createdTime) {
+        public void setCreatedTime(String createdTime) {
             this.createdTime = createdTime;
         }
     }

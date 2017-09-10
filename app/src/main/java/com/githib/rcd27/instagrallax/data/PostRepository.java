@@ -1,42 +1,34 @@
 package com.githib.rcd27.instagrallax.data;
 
 
-import java.util.ArrayList;
+import com.githib.rcd27.instagrallax.net.InstagramApi;
+import com.githib.rcd27.instagrallax.post.MediaDataToPostCommentsMapper;
+import com.githib.rcd27.instagrallax.post.PostComment;
+
 import java.util.List;
 
+import io.reactivex.Observable;
+import io.reactivex.ObservableTransformer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
+
+@SuppressWarnings("unchecked")
 public class PostRepository {
 
-    private static PostRepository instance;
-    private final List<String> comments;
+    private final InstagramApi api;
+    private final ObservableTransformer schedulersTransformer;
 
-    private PostRepository() {
-        this.comments = new ArrayList<String>() {{
-            add("А, ну, конечно, если всё вокруг сгибается, то виноват робот, созданный для сгибания.");
-            add("Вдруг моя жизнь — выдумка чьего-то больного воображения?");
-            add("Всё что угодно, кроме бессмертия, — бесполезная трата времени.");
-            add("Итак, я богат. Пока, неудачники! Я вас всегда ненавидел.");
-            add("Каждый раз, когда я говорил: «Смерть всем людям», шепотом добавлял: «Кроме одного». Им был Фрай. Я так ему и не сказал этого.");
-            add("Качание — это всего лишь примитивная разновидность сгибания!");
-            add("Мне не нужна выпивка! Я могу бросить в любой момент.");
-            add("Мне так стыдно! Хочу, чтобы все умерли!");
-            add("На помощь! На помощь! Я слишком ленив, чтобы спасаться!");
-            add("Не бейте меня!.. Я предам кого угодно!");
-            add("Не люблю тусоваться! Просто у меня шило в жопе, которого я не просил!");
-            add("Он напрашивается на сгибание!");
-            add("Позёры! Я ненавидел Зойдберга ещё до того, как это стало модным.");
-            add("Пока, начинки для гробов.");
-            add("Спаси моих друзей… и Зойдберга!");
-        }};
+    public PostRepository(InstagramApi api) {
+        this.api = api;
+        schedulersTransformer = observable -> observable
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
     }
 
-    public static PostRepository getInstance() {
-        if (null == instance) {
-            instance = new PostRepository();
-        }
-        return instance;
-    }
-
-    public List<String> getComments() {
-        return comments;
+    public Observable<List<PostComment>> getCommentsForPost(String postId) {
+        return api.getCommentsForPost(postId)
+                // TODO сделать анонимным вложенным классом. Все мапперы
+                .map(new MediaDataToPostCommentsMapper())
+                .compose(schedulersTransformer);
     }
 }

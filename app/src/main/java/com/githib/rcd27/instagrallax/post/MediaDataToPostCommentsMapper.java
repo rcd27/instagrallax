@@ -22,8 +22,8 @@ public class MediaDataToPostCommentsMapper implements Function<MediaDataDTO, Lis
                     currentData.getFrom().getId(),
                     currentData.getFrom().getUsername(),
                     currentData.getFrom().getFullName(),
-                    currentData.getFrom().getProfilePicture()
-            ));
+                    currentData.getFrom().getProfilePicture())
+            );
         }
         return result;
     }

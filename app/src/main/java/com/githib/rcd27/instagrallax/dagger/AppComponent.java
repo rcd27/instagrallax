@@ -15,4 +15,6 @@ public interface AppComponent {
 
     UserComponent plus(UserModule userModule);
 
+    PostComponent plus(PostModule postModule);
+
 }
