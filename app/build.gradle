@@ -6,7 +6,7 @@ android {
     compileSdkVersion versions.compileSdk
     buildToolsVersion versions.buildTools
     defaultConfig {
-        applicationId "com.githib.rcd27.instagrallax"
+        applicationId "com.github.rcd27.instagrallax"
         minSdkVersion versions.minSdk
         targetSdkVersion versions.targetSdk
         versionCode versions.code

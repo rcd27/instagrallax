@@ -11,7 +11,7 @@ buildscript {
     dependencies {
         classpath gradlePlugins.android
         classpath gradlePlugins.retrolambda
-        classpath gradlePlugins.versions // run: gradlew dependecyUpdates
+        classpath gradlePlugins.versions // run: gradlew dependencyUpdates
         classpath gradlePlugins.dexCount
     }
 }

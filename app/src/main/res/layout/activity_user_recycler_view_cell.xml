@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
@@ -14,6 +13,6 @@
         android:layout_gravity="center"
         android:contentDescription="@string/image_view_description"
         android:scaleType="centerCrop"
-        android:transitionName="sharedImageView"/>
+        android:transitionName="sharedImageView" />
 
 </FrameLayout>
