@@ -13,16 +13,12 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
 @SuppressWarnings("unchecked")
-public class PostRepository {
+public class PostRepository extends BaseRepository{
 
     private final InstagramApi api;
-    private final ObservableTransformer schedulersTransformer;
 
     public PostRepository(InstagramApi api) {
         this.api = api;
-        schedulersTransformer = observable -> observable
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread());
     }
 
     public Observable<List<PostComment>> getCommentsForPost(String postId) {

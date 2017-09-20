@@ -12,21 +12,15 @@ import com.github.rcd27.instagrallax.user.UserPost;
 import java.util.List;
 
 import io.reactivex.Observable;
-import io.reactivex.ObservableTransformer;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
 
 @SuppressWarnings("unchecked")
-public class UserRepository {
+public class UserRepository extends BaseRepository {
 
     private final InstagramApi api;
-    private final ObservableTransformer schedulersTransformer;
 
+    //TODO: тоже можно убрать в BaseRepository
     public UserRepository(InstagramApi api) {
         this.api = api;
-        schedulersTransformer = observable -> observable
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread());
     }
 
     @NonNull

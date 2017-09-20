@@ -11,7 +11,7 @@ import com.github.rcd27.instagrallax.net.NetworkModule;
 /**
  * TODO:
  * 1) BasePresenter(cd:CompositeDisposable) <- all presenters implement add(), onDetach()
- * 2) BaseRepository(st:SchedulerTransformer) <- all repos
+ *  → → 2) BaseRepository(st:SchedulerTransformer) <- all repos
  * 3) PostImage: method refactor -> sort(String quality){...}
  * 4) On image click: transfer @ResId instead of ImageView to the presenter
  */
