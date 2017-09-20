@@ -14,6 +14,10 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
+        debug {
+            // sandbox access_token
+            buildConfigField("String", "INSTAGRAM_ACCESS_TOKEN", "\"5968608397.efb6703.e766cc20812c4842ab903edded1148c9\"")
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
