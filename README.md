@@ -1,3 +1,18 @@
+EN:
+### Instagrallax/Magnetto app
+
+##### Summary:
+This is an Android client for Instagram API. Works in sandbox mode, you can search user and content only from user whos acces_token is used. What is implemented: user search, recent user posts search, post detail.
+
+#####
+Used stack:
+RxJava2, Dagger2, Retrofit, MVP
+
+>##### UPD:
+> Instagram has strongly injured API, so if you want to check this app out, you have to get your own access_token and add it to the app.
+
+
+RU:
 ### Instagrallax/Magnetto app
 
 ##### Краткое описание:
